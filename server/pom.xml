@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>testportal-project</artifactId>
-  <groupId>com.testportal</groupId>
-  <version>2.0</version>
+  <artifactId>workman-project</artifactId>
+  <groupId>workman</groupId>
+  <version>1.0</version>
   <packaging>pom</packaging>
-  <name>Test Portal Project</name>
+  <name>Work Cost Management System Backend</name>
   <inceptionYear>2016</inceptionYear>
   <url>https://testportal.jp</url>
 
@@ -51,7 +51,6 @@
   </pluginRepositories>
 
   <modules>
-    <module>service-jwt</module>
     <module>service-data</module>
     <module>service-tool</module>
     <module>user-api</module>

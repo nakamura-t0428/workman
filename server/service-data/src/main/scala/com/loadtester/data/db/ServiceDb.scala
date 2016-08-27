@@ -1,7 +1,7 @@
 package com.loadtester.data.db
 
-import github.nakamura_t0428.db.DbBase
 import com.loadtester.data.table._
+import com.loadtester.data.db.base.DbBase
 
 class ServiceDb(runMode:String = DbBase.envRunMode)
 extends DbBase("/testportal-db", runMode)

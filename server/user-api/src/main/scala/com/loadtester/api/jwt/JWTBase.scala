@@ -1,4 +1,4 @@
-package com.loadtester.jwt
+package com.loadtester.api.jwt
 
 import com.nimbusds.jwt.JWTClaimsSet
 import scala.concurrent.duration.Duration

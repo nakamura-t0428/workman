@@ -10,7 +10,7 @@ import com.loadtester.data.dto.UserReg
 import com.loadtester.api.json.JsonSupport._
 import com.loadtester.api.json.request.{UserRegister}
 import com.loadtester.api.json.response.{SuccessMessage, FailureMessage, AuthorizationError}
-import com.loadtester.jwt.{TmpAuthJWT, UserAuthJWT}
+import com.loadtester.api.jwt.{TmpAuthJWT, UserAuthJWT}
 
 object CustomDirectives {
   val TokenHeader = "Auth-Token"

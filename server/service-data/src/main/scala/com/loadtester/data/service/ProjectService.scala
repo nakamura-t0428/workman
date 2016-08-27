@@ -2,9 +2,9 @@ package com.loadtester.data.service
 
 import com.loadtester.data.db.ServiceDb
 import com.loadtester.data.dto.ProjectReg
-import github.nakamura_t0428.util.helper.UUIDHelper
+import com.loadtester.util.helper.UUIDHelper
 import com.loadtester.data.model.Project
-import github.nakamura_t0428.util.helper.DateHelper.now
+import com.loadtester.util.helper.DateHelper.now
 import scala.concurrent.ExecutionContext.Implicits.global
 import com.loadtester.data.dto.ProjectInfo
 import com.loadtester.data.dto.UserInfo

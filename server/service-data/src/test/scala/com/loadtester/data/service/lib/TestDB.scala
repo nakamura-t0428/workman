@@ -1,6 +1,6 @@
 package com.loadtester.data.service.lib
 
 import com.loadtester.data.ServiceFactory
-import github.nakamura_t0428.db.DbBase
+import com.loadtester.data.db.base.DbBase
 
 object TestDB extends ServiceFactory(DbBase.RUNMODE_TEST)

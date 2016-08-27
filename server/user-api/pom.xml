@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>testportal-project</artifactId>
-    <groupId>com.testportal</groupId>
-    <version>2.0</version>
+    <artifactId>workman-project</artifactId>
+    <groupId>workman</groupId>
+    <version>1.0</version>
   </parent>
   <artifactId>user-api</artifactId>
   <packaging>jar</packaging>
@@ -28,12 +28,6 @@
       <version>${shift.commonlib.version}</version>
     </dependency>
     
-    <!-- Service JWT -->
-    <dependency>
-      <groupId>${project.parent.groupId}</groupId>
-      <artifactId>service-jwt</artifactId>
-      <version>${project.parent.version}</version>
-    </dependency>
     <!-- Service DB -->
     <dependency>
       <groupId>${project.parent.groupId}</groupId>

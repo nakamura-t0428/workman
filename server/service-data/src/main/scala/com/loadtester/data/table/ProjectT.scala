@@ -1,6 +1,6 @@
 package com.loadtester.data.table
 
-import github.nakamura_t0428.db.Driver
+import com.loadtester.data.db.base.Driver
 import com.loadtester.data.model._
 import java.sql.Timestamp
 

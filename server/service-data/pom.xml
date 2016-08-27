@@ -2,33 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>testportal-project</artifactId>
-    <groupId>com.testportal</groupId>
-    <version>2.0</version>
+    <artifactId>workman-project</artifactId>
+    <groupId>workman</groupId>
+    <version>1.0</version>
   </parent>
   <artifactId>service-data</artifactId>
   <packaging>jar</packaging>
   <name>Service Data</name>
 
   <dependencies>
+    <!-- FOR BASE64Encoding -->
     <dependency>
-      <groupId>github.nakamura_t0428</groupId>
-      <artifactId>common-util</artifactId>
-      <version>${shift.commonlib.version}</version>
+     <groupId>commons-codec</groupId>
+     <artifactId>commons-codec</artifactId>
+     <version>1.9</version>
     </dependency>
-    <dependency>
-      <groupId>github.nakamura_t0428</groupId>
-      <artifactId>common-db</artifactId>
-      <version>${shift.commonlib.version}</version>
-    </dependency>
-
-    <!-- Service JWT -->
-    <dependency>
-      <groupId>${project.parent.groupId}</groupId>
-      <artifactId>service-jwt</artifactId>
-      <version>${project.parent.version}</version>
-    </dependency>
-    
     <dependency>
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-library</artifactId>

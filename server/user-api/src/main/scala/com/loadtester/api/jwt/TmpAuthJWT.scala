@@ -1,9 +1,8 @@
-package com.loadtester.jwt
+package com.loadtester.api.jwt
 
 import com.nimbusds.jwt.JWTClaimsSet
 import scala.concurrent.duration.DurationInt
 import github.nakamura_t0428.util.helper.UUIDHelper
-import com.loadtester.jwt.dto.UserRegisterJWT
 import scala.concurrent.duration.Duration
 
 object TmpAuthJWT extends JWTBase {

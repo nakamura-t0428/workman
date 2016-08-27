@@ -3,7 +3,7 @@ package com.loadtester.api.service
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import github.nakamura_t0428.mail.MailUtil
-import com.loadtester.jwt.TmpAuthJWT
+import com.loadtester.api.jwt.TmpAuthJWT
 import com.loadtester.api.util.UserAPIProps
 import com.loadtester.api.mail.InvitationMail
 import com.loadtester.api.db.Redis

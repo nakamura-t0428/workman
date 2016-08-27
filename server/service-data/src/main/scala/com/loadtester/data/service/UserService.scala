@@ -1,7 +1,7 @@
 package com.loadtester.data.service
 
 import com.loadtester.data.db.ServiceDb
-import github.nakamura_t0428.util.helper.StringHelper
+import com.loadtester.util.helper.StringHelper
 import com.loadtester.data.dto.UserAuth
 import com.loadtester.data.dto.UserBase
 import scala.concurrent.Future

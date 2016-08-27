@@ -1,4 +1,4 @@
-package com.loadtester.jwt
+package com.loadtester.api.jwt
 
 import github.nakamura_t0428.util.helper.PropertyHelper
 

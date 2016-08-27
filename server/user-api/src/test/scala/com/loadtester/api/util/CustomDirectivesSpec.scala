@@ -20,7 +20,7 @@ import spray.routing.authentication.{
 import com.typesafe.scalalogging.LazyLogging
 import com.nimbusds.jose.{JWSObject, JWSAlgorithm}
 import com.nimbusds.jwt.JWTClaimsSet
-import com.loadtester.jwt.{UserAuthJWT, TmpAuthJWT}
+import com.loadtester.api.jwt.{UserAuthJWT, TmpAuthJWT}
 import com.loadtester.api.db.{DbServices => db}
 import com.loadtester.api.json.JsonSupport._
 import com.loadtester.api.json.UserJsonSupport._

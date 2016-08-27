@@ -1,8 +1,7 @@
-package com.loadtester.jwt
+package com.loadtester.api.jwt
 
 import com.nimbusds.jwt.JWTClaimsSet
 import scala.concurrent.duration.DurationInt
-import com.nimbusds.jose.JWSObject
 import scala.concurrent.duration.Duration
 
 object UserAuthJWT extends JWTBase {

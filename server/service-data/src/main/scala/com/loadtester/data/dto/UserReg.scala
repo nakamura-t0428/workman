@@ -1,7 +1,7 @@
 package com.loadtester.data.dto
 
 import java.sql.Timestamp
-import github.nakamura_t0428.util.helper.DateHelper.now
+import com.loadtester.util.helper.DateHelper.now
 
 case class UserReg(
     userId:String,
