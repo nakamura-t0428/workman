@@ -7,7 +7,6 @@ var tsd = require('gulp-tsd');
 var ts = require('gulp-typescript');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
-var webpack = require('gulp-webpack');
 var sourcemaps = require('gulp-sourcemaps');
 var htmlmin = require('gulp-htmlmin');
 var imagemin = require('gulp-imagemin');

@@ -40,15 +40,14 @@
     "gulp-cssnext": "~1.0.1",
     "gulp-angular-templatecache": "~1.8.0",
     "ignore-loader": "~0.1.1",
-    "gulp-flatten": "~0.2.0"
-  },
-  "dependencies": {
+    "gulp-flatten": "~0.2.0",
     "ts-loader": "~0.8.2",
     "typescript": "~1.8.10",
     "webpack-stream": "~3.2.0",
     "webpack": "~1.13.0",
-    "file-loader": "~0.8.5",
     "url-loader": "~0.5.7",
     "ng-cache-loader": "0.0.15"
+  },
+  "dependencies": {
   }
 }
