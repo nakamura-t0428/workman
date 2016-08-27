@@ -1,0 +1,49 @@
+@import "bootstrap";
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+/* Wrapper for page content to push down footer */
+#pagewrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -40px;
+}
+
+/* Set the fixed height of the footer here */
+#footer-push,
+#footer {
+  height: 40px;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+#wrap > .container {
+  min-height:400px;
+}
+#footer {
+  background-color: #585858;
+  color: #ffffff;
+}
+
+.footercopy {
+    margin: 10px;
+    text-align: center;
+}
+
+ul.nav > li > ul.nav > li > a {
+  font-size: small;
+  margin: 0 10px 0 20px;
+  padding: 5px 10px 5px 10px;
+}
+ul.nav > li > ul.nav > li > span {
+  font-size: small;
+  margin: 0 10px 0 20px;
+  padding: 5px 10px 5px 10px;
+}

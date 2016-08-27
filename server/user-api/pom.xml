@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>testportal-project</artifactId>
+    <groupId>com.testportal</groupId>
+    <version>2.0</version>
+  </parent>
+  <artifactId>user-api</artifactId>
+  <packaging>jar</packaging>
+  <name>User REST API</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>${scala.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>github.nakamura_t0428</groupId>
+      <artifactId>common-util</artifactId>
+      <version>${shift.commonlib.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>github.nakamura_t0428</groupId>
+      <artifactId>common-mail</artifactId>
+      <version>${shift.commonlib.version}</version>
+    </dependency>
+    
+    <!-- Service JWT -->
+    <dependency>
+      <groupId>${project.parent.groupId}</groupId>
+      <artifactId>service-jwt</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
+    <!-- Service DB -->
+    <dependency>
+      <groupId>${project.parent.groupId}</groupId>
+      <artifactId>service-data</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
+
+    <!-- Spray HTTP -->
+    <dependency>
+      <groupId>com.typesafe.akka</groupId>
+      <artifactId>akka-actor_${scala.version.major}</artifactId>
+      <version>${akka.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.spray</groupId>
+      <artifactId>spray-can_${scala.version.major}</artifactId>
+      <version>${spray.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.spray</groupId>
+      <artifactId>spray-routing_${scala.version.major}</artifactId>
+      <version>${spray.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.spray</groupId>
+      <artifactId>spray-client_${scala.version.major}</artifactId>
+      <version>${spray.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.spray</groupId>
+      <artifactId>spray-json_${scala.version.major}</artifactId>
+      <version>1.3.2</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>net.debasishg</groupId>
+      <artifactId>redisclient_${scala.version.major}</artifactId>
+      <version>3.1</version>
+    </dependency>
+    
+    <!-- JWT(Json Web Token) -->
+    <dependency>
+      <groupId>com.nimbusds</groupId>
+      <artifactId>nimbus-jose-jwt</artifactId>
+      <version>4.12</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.18</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.1.6</version>
+    </dependency>
+    <dependency>
+      <groupId>com.typesafe.scala-logging</groupId>
+      <artifactId>scala-logging_${scala.version.major}</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.specs2</groupId>
+      <artifactId>specs2_${scala.version.major}</artifactId>
+      <version>2.3.12</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-webapp</artifactId>
+      <version>8.1.10.v20130312</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- For Unit Test -->
+    <dependency>
+      <groupId>org.scalatest</groupId>
+      <artifactId>scalatest_${scala.version.major}</artifactId>
+      <version>2.2.6</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.spray</groupId>
+      <artifactId>spray-testkit_${scala.version.major}</artifactId>
+      <version>${spray.version}</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <!-- for LiftConsole -->
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-compiler</artifactId>
+      <version>${scala.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+
+  <build>
+      <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <mainClass>com.loadtester.api.Boot</mainClass>
+                </configuration>
+            </plugin>
+
+			<plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <version>2.15.2</version>
+                <executions>
+					<execution>
+						<id>scala-compile-first</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>add-source</goal>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>scala-test-compile</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <index>true</index>
+                        <manifest>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.loadtester.api.Boot</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <overWriteReleases>true</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+      <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <configuration>
+              <archive>
+                  <manifest>
+                      <mainClass>com.loadtester.api.Boot</mainClass>
+                  </manifest>
+              </archive>
+              <descriptorRefs>
+                  <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+          </configuration>
+          <executions>
+              <execution>
+                  <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                  <phase>package</phase> <!-- bind to the packaging phase -->
+                  <goals>
+                      <goal>single</goal>
+                  </goals>
+              </execution>
+          </executions>
+      </plugin>
+      </plugins>
+      <pluginManagement>
+      	<plugins>
+      		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+      		<plugin>
+      			<groupId>org.eclipse.m2e</groupId>
+      			<artifactId>lifecycle-mapping</artifactId>
+      			<version>1.0.0</version>
+      			<configuration>
+      				<lifecycleMappingMetadata>
+      					<pluginExecutions>
+      						<pluginExecution>
+      							<pluginExecutionFilter>
+      								<groupId>
+      									org.apache.maven.plugins
+      								</groupId>
+      								<artifactId>
+      									maven-dependency-plugin
+      								</artifactId>
+      								<versionRange>
+      									[2.2,)
+      								</versionRange>
+      								<goals>
+      									<goal>copy-dependencies</goal>
+      								</goals>
+      							</pluginExecutionFilter>
+      							<action>
+      								<ignore></ignore>
+      							</action>
+      						</pluginExecution>
+      						<pluginExecution>
+      							<pluginExecutionFilter>
+      								<groupId>org.scala-tools</groupId>
+      								<artifactId>
+      									maven-scala-plugin
+      								</artifactId>
+      								<versionRange>
+      									[2.15.2,)
+      								</versionRange>
+      								<goals>
+      									<goal>compile</goal>
+      									<goal>add-source</goal>
+      									<goal>testCompile</goal>
+      								</goals>
+      							</pluginExecutionFilter>
+      							<action>
+      								<ignore></ignore>
+      							</action>
+      						</pluginExecution>
+      					</pluginExecutions>
+      				</lifecycleMappingMetadata>
+      			</configuration>
+      		</plugin>
+      	</plugins>
+      </pluginManagement>
+  </build>
+</project>

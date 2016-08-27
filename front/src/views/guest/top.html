@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form ng-controller="signInController as signInCtrl" ng-submit="signInCtrl.submit();">
+        <uib-alert ng-repeat="alert in signInCtrl.alerts" type="{{alert.type}}">{{alert.msg}}</uib-alert>
+        <div class="form-group">
+          <label class="sr-only" for="exampleInputEmail1" >Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" ng-model="signInCtrl.data.email">
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ng-model="signInCtrl.data.passwd">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+    </div>
+  </div><!-- panel -->
+</div>

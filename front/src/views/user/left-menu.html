@@ -1,0 +1,14 @@
+<nav>
+  <ul class="nav nav-pills nav-stacked">
+    <li ng-controller="projectListController as prjListCtrl">
+      <a class="dropdown-toggle" data-toggle="dropdown">
+        プロジェクト
+      </a>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href ng-click="prjListCtrl.showCreatePrjDlg();"><span class="glyphicon glyphicon-plus"></span> 新規プロジェクト</a></li>
+        <li ui-sref-active="active" ng-repeat="prj in prjListCtrl.projects"><a ui-sref="user.top.project({ prjId: prj.prjId })">{{prj.name | limitTo:16 }}</a></li>
+      </ul>
+    </li>
+  </nav>
+</nav>
+

@@ -1,0 +1,16 @@
+<div ng-controller="projectController as prjCtrl">
+  <ui-view>
+    <h2>
+      <div class="btn-group pull-right" uib-dropdown>
+        <button type="button" id="prj-menu-dropdown" uib-dropdown-toggle class="btn btn-default"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+        <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="prj-menu-dropdown">
+          <li role="menuitem" ng-class="{disabled: !prjCtrl.isDeletable()}">
+            <a ng-click="prjCtrl.showDeletePrjDlg();"><span class="glyphicon glyphicon-remove"></span>削除</a>
+          </li>
+        </ul>
+      </div>
+    </h2>
+    <a class="btn btn-default" ui-sref=".sitemap">Sitemap</a>
+    <pre>{{prjCtrl.project | json}}</pre>
+  </ui-view>
+</div>

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form class="form-horizontal" ng-controller="signUpController as signUpCtrl" ng-submit="signUpCtrl.submit();">
+        <uib-alert ng-repeat="alert in signUpCtrl.alerts" type="{{alert.type}}">{{alert.msg}}</uib-alert>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="signUpName" >お名前</label>
+          <div class="col-sm-5">
+            <input type="name" class="form-control" id="signUpName" placeholder="Email" ng-model="signUpCtrl.data.name" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="signUpPasswd">Password</label>
+          <div class="col-sm-5">
+            <input type="password" class="form-control" id="signUpPasswd" placeholder="Password" ng-model="signUpCtrl.data.passwd" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="signUpPasswdRe">Confirm</label>
+          <div class="col-sm-5">
+            <input type="password" class="form-control" id="signUpPasswdRe" placeholder="Password" ng-model="signUpCtrl.passwdRe" required>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">SignUp</button>
+      </form>
+    </div>
+  </div><!-- panel -->
+</div>

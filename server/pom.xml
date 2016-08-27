@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>testportal-project</artifactId>
+  <groupId>com.testportal</groupId>
+  <version>2.0</version>
+  <packaging>pom</packaging>
+  <name>Test Portal Project</name>
+  <inceptionYear>2016</inceptionYear>
+  <url>https://testportal.jp</url>
+
+  <properties>
+    <encoding>UTF-8</encoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <scala.version.major>2.11</scala.version.major>
+    <scala.version>2.11.7</scala.version>
+    <akka.version>2.4.2</akka.version>
+    <spray.version>1.3.3</spray.version>
+    <junit.version>4.11</junit.version>
+    <shift.commonlib.version>3.0</shift.commonlib.version>
+
+    <!-- Common plugin settings -->
+    <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+    <!-- vscaladoc settings -->
+    <maven.scaladoc.vscaladocVersion>1.2-m1</maven.scaladoc.vscaladocVersion>
+    <vscaladoc.links.liftweb.pathsufix>scaladocs/</vscaladoc.links.liftweb.pathsufix>
+    <vscaladoc.links.liftweb.baseurl>https://oss.sonatype.org/content/groups/scala-tools/liftweb</vscaladoc.links.liftweb.baseurl>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>scala-tools.releases</id>
+      <name>Scala-Tools Dependencies Repository for Releases</name>
+      <url>https://oss.sonatype.org/content/groups/scala-tools</url>
+    </repository>
+    <repository>
+      <id>java.net.maven2</id>
+      <name>java.net Maven2 Repository</name>
+      <url>http://download.java.net/maven/2/</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>io.spray.release</id>
+      <name>spray repo</name>
+      <url>http://repo.spray.io</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <modules>
+    <module>service-jwt</module>
+    <module>service-data</module>
+    <module>service-tool</module>
+    <module>user-api</module>
+  </modules>
+</project>

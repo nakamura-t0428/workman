@@ -1,0 +1,9 @@
+dist
+node_modules
+bower_components
+typings
+src/commons
+**/ts/**/*.js
+**/commonts/*.js
+*.log
+*.map
