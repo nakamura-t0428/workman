@@ -17,6 +17,13 @@ export class SignUpController
   };
   passwdRe: string = '';
   
+  public static get state() {
+    return {
+      url: '/signup/:token',
+      templateUrl: 'guest/signup.html',
+    };
+  }
+
   constructor(
     private $state:IStateService,
     private $stateParams:IStateParamsService,

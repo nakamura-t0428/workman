@@ -16,6 +16,13 @@ export interface ProjectControllerScope extends IScope {
 export class ProjectController {
   public project:IProjectDetail;
   
+  public static get state() {
+    return {
+      url: '/project/:prjId',
+      templateUrl: 'user/project/projectDetail.html',
+    };
+  }
+
   constructor(
     private projectResource:ProjectDataResource,
     private $state:IStateService,

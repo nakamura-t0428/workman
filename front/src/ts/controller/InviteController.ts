@@ -14,6 +14,13 @@ export class InviteController
   };
   mailSent = false;
   
+  public static get state() {
+    return {
+      url: '/invite',
+      templateUrl: 'guest/invite.html',
+    };
+  }
+
   constructor(
     private $state:IStateService,
     private inviteDataResource: InviteDataResource

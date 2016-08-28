@@ -10,8 +10,11 @@ import {MyInfoResource} from '../resource/MyInfoResource';
 import {AuthService} from '../service/AuthService';
 import {MyInfoFactory} from '../factory/MyInfoFactory'
 import {IMyInfoResp} from "../model/IMyInfoResp";
+import {InviteController} from "../controller/InviteController";
+import {SignUpController} from "../controller/SignUpController";
 import {GuestController} from '../controller/GuestController';
 import {UserController} from '../controller/UserController';
+import {ProjectController} from '../controller/ProjectController';
 
 export class Sitemap {
   constructor(
@@ -21,39 +24,14 @@ export class Sitemap {
   ) {
     $urlRouterProvider.otherwise('/guest/top')
     $stateProvider
-    .state('guest', { //ゲスト画面のベース
-      abstract: true,
-      url: '/guest',
-      templateUrl: 'guest/base.html',
-      controller: ['$state', 'myInfoResource', ($state:IStateService, myInfoResource:MyInfoResource) => new GuestController($state, myInfoResource)],
-      controllerAs: 'guestCtrl'
-    })
-    $stateProvider
+    .state('guest', GuestController.state)
     .state('guest.top', { //ゲスト画面トップ（ログイン）
       url: '/top',
       templateUrl: 'guest/top.html',
     })
-    $stateProvider
-    .state('guest.invite', { //ゲスト画面 登録申請
-      url: '/invite',
-      templateUrl: 'guest/invite.html',
-    })
-    $stateProvider
-    .state('guest.signup', { //ゲスト画面 本登録
-      url: '/signup/:token',
-      templateUrl: 'guest/signup.html',
-    })
-    $stateProvider
-    .state('user', { //ユーザ 基礎
-      abstract: true,
-      url: '/user',
-      templateUrl: 'user/base.html',
-      controller: ['$state', '$localStorage', 'myInfoResource',
-       ($state:IStateService, $localStorage:IStorageService, myInfoResource:MyInfoResource) =>
-        new UserController($state, $localStorage, myInfoResource)],
-      controllerAs: 'userCtrl'
-    })
-    $stateProvider
+    .state('guest.invite', InviteController.state) //ゲスト画面 登録申請
+    .state('guest.signup', SignUpController.state) //ゲスト画面 本登録
+    .state('user', UserController.state) //ユーザ 基礎
     .state('user.top', { // ユーザ トップ
       url: '/top',
       views: {
@@ -65,17 +43,11 @@ export class Sitemap {
         },
       },
     })
-    $stateProvider
-    .state('user.top.project', { // ユーザ プロジェクト
-      url: '/project/:prjId',
-      templateUrl: 'user/project/projectDetail.html',
-    })
-    $stateProvider
+    .state('user.top.project', ProjectController.state) // ユーザ プロジェクト
     .state('user.top.project.sitemap', { // ユーザ プロジェクト
       url: '/sitemap',
       templateUrl: 'user/project/projectSitemap.html',
     })
-    $stateProvider
     .state('user.top.project.member', { // ユーザ プロジェクト
       url: '/member',
       templateUrl: 'user/project/projectMember.html',

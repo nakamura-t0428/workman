@@ -19,6 +19,16 @@ export class UserController {
 
   public topMenu:Array<ITopMenu> = [];
   
+  public static get state() {
+    return {
+      abstract: true,
+      url: '/user',
+      templateUrl: 'user/base.html',
+      controller: ['$state', '$localStorage', 'myInfoResource', UserController],
+      controllerAs: 'userCtrl'
+    };
+  }
+
   constructor(
     private $state:IStateService,
     private $localStorage:IStorageService,
