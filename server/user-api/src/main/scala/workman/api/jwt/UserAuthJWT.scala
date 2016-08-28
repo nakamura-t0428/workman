@@ -13,7 +13,7 @@ object UserAuthJWT extends JWTBase {
     .build()
   }
   
-  def tokenString(userId:String, exp:Duration = 10 minutes):String = {
+  def tokenString(userId:String, exp:Duration = JWTProps.tokenLifeUser):String = {
     toTokenStr(apply(userId, exp))
   }
   

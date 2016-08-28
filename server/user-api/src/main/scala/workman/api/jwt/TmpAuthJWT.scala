@@ -15,12 +15,12 @@ object TmpAuthJWT extends JWTBase {
     .build()
   }
   
-  def generate(email:String, exp: Duration = 24 hours):JWTClaimsSet = {
+  def generate(email:String, exp: Duration = JWTProps.tokenLifeInvitation):JWTClaimsSet = {
     val uuid = java.util.UUID.randomUUID
     apply(UUIDHelper.uuidToBase64(uuid), email, exp)
   }
   
-  def tokenStr(email:String, exp: Duration = 24 hours):String = {
+  def tokenStr(email:String, exp: Duration = JWTProps.tokenLifeInvitation):String = {
     toTokenStr(generate(email, exp))
   }
   
