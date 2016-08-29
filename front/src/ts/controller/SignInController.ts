@@ -5,7 +5,7 @@ import IStateParamsService = angular.ui.IStateParamsService;
 import {APIEndPoint} from '../service/APIEndPoint';
 import {ISignInData} from '../model/ISignInData'
 import {ISignInRespData} from '../model/ISignInRespData';
-import {PostControllerBase} from './PostControllerBase';
+import {PostControllerBase} from './base/PostControllerBase';
 
 
 export class SignInController

@@ -1,39 +1,37 @@
 /// <reference path="../../../typings/tsd.d.ts"/>
 
 import IResourceService = ng.resource.IResourceService;
-import {ConfigService} from '../service/ConfigService';
+import {Constants} from '../config/Constants';
 
 
 export class APIEndPoint {
   constructor(
-    private config:ConfigService,
     private $resource:IResourceService
   ) {}
 
   public get inviteResource() {
-    return this.$resource(this.config.apiPref + '/invite');
+    return this.$resource(Constants.apiPref + '/invite');
   }
   public get myinfoResource() {
-    return this.$resource(this.config.apiPref + '/myinfo');
+    return this.$resource(Constants.apiPref + '/myinfo');
   }
   public get signinResource() {
-    return this.$resource(this.config.apiPref + '/signin');
+    return this.$resource(Constants.apiPref + '/signin');
   }
   public get signupResource() {
-    return this.$resource(this.config.apiPref + '/signup');
+    return this.$resource(Constants.apiPref + '/signup');
   }
   public get projectResource() {
-    return this.$resource(this.config.apiPref + '/project/:prjId', {prjId: '@prjId'});
+    return this.$resource(Constants.apiPref + '/project/:prjId', {prjId: '@prjId'});
   }
   public get sitemapResource() {
-    return this.$resource(this.config.apiPref + '/sitemap/:siteMapId', {siteMapId: '@siteMapId'});
+    return this.$resource(Constants.apiPref + '/sitemap/:siteMapId', {siteMapId: '@siteMapId'});
   }
 
 
   public static factory(
-    config:ConfigService,
     $resource:IResourceService
   ):APIEndPoint {
-    return new APIEndPoint(config, $resource);
+    return new APIEndPoint($resource);
   }
 }

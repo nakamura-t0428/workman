@@ -1,9 +1,9 @@
-/// <reference path="../../../typings/tsd.d.ts"/>
+/// <reference path="../../../../typings/tsd.d.ts"/>
 
 import IResource = ng.resource.IResource;
 import IResourceClass = ng.resource.IResourceClass
 
-import {IBaseRespData} from '../model/IBaseRespData'
+import {IBaseRespData} from '../../model/IBaseRespData'
 import {MsgControllerBase} from './MsgControllerBase';
 
 

@@ -4,13 +4,20 @@ import IHttpProvider = angular.IHttpProvider;
 import IQService = angular.IQService;
 import IStorageService = angular.storage.IStorageService;
 import IStateService = angular.ui.IStateService;
-import {ConfigService} from "../service/ConfigService";
+import {Constants} from "./Constants";
 
 export class AuthConfig{
   constructor(
-    $httpProvider:IHttpProvider) {
-    $httpProvider.interceptors.push(['config', '$q', '$localStorage',
-      (config, $q, $localStorage) => new AuthRequestIntercepter(config, $q, $localStorage)]);
+    $httpProvider:IHttpProvider
+  ) {
+    $httpProvider.interceptors.push(['$q', '$localStorage',
+      ($q, $localStorage) => new AuthRequestIntercepter($q, $localStorage)]);
+  }
+
+  public static factory(
+    $httpProvider:IHttpProvider
+  ):AuthConfig {
+    return new AuthConfig($httpProvider);
   }
 }
 interface AuthLocalStorage extends IStorageService {
@@ -19,7 +26,6 @@ interface AuthLocalStorage extends IStorageService {
 class AuthRequestIntercepter {
   private storage:AuthLocalStorage;
   constructor(
-    private config:ConfigService,
     private $q:angular.IQService,
     private $localStorage: IStorageService
    ) {
@@ -28,7 +34,7 @@ class AuthRequestIntercepter {
      });
   }
   public request = (config:angular.IRequestConfig) => {
-    if(config.url.indexOf(this.config.apiPref)==0) {
+    if(config.url.indexOf(Constants.apiPref)==0) {
       config.headers = config.headers || {};
       console.log(this.storage.authToken);
       if (this.storage.authToken) {
@@ -38,7 +44,7 @@ class AuthRequestIntercepter {
     return config;
   }
   public response = (response:angular.IHttpPromiseCallbackArg<any>) => {
-    if(response.config.url.indexOf(this.config.apiPref)==0 && response.headers('Auth-Token')) {
+    if(response.config.url.indexOf(Constants.apiPref)==0 && response.headers('Auth-Token')) {
       this.storage.authToken = response.headers('Auth-Token');
       console.log('authToken updated.');
     } else if (response.status == 403 && response.data['errId'] == 'authorization_error') {

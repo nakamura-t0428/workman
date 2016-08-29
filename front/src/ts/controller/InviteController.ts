@@ -3,7 +3,7 @@
 import IStateService = angular.ui.IStateService;
 import IStateParamsService = angular.ui.IStateParamsService;
 import {APIEndPoint} from '../service/APIEndPoint';
-import {PostControllerBase} from './PostControllerBase';
+import {PostControllerBase} from './base/PostControllerBase';
 import {IInviteRespData} from '../model/IInviteRespData';
 import {IInviteData} from '../model/IInviteData';
 

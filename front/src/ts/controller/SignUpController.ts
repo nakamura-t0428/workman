@@ -5,7 +5,7 @@ import IStateParamsService = angular.ui.IStateParamsService;
 import {APIEndPoint} from '../service/APIEndPoint';
 import {ISignUpData} from '../model/ISignUpData';
 import {ISignUpRespData} from '../model/ISignUpRespData';
-import {PostControllerBase} from './PostControllerBase';
+import {PostControllerBase} from './base/PostControllerBase';
 
 export class SignUpController
   extends PostControllerBase<ISignUpData, ISignUpRespData> {
