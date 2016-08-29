@@ -7,7 +7,7 @@ import {IBaseRespData} from '../model/IBaseRespData'
 import {MsgControllerBase} from './MsgControllerBase';
 
 
-export abstract class PostControllerBase<A, B extends IResourceClass<A & IResource<A>>, R extends IBaseRespData> extends MsgControllerBase {
+export abstract class PostControllerBase<A, R extends IBaseRespData> extends MsgControllerBase {
   data: A;
   
   abstract onSubmitSuccess(resp:R, r:any):void;
@@ -22,7 +22,7 @@ export abstract class PostControllerBase<A, B extends IResourceClass<A & IResour
   }
   
   constructor(
-    private dataResource: B
+    private dataResource: IResourceClass<any>
   ) {
     super();
   }

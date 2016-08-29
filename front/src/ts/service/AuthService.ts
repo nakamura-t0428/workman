@@ -2,7 +2,6 @@
 
 import IStateService = angular.ui.IStateService;
 import IStorageService = angular.storage.IStorageService;
-import {MyInfoResource} from '../resource/MyInfoResource';
 import {IMyInfoResp} from '../model/IMyInfoResp';
 
 export class AuthService {

@@ -2,7 +2,7 @@
 
 import IModalService = angular.ui.bootstrap.IModalService;
 import {IProject, INewProject} from '../model/IProjectData';
-import {ProjectDataResource} from '../resource/ProjectDataResource';
+import {APIEndPoint} from '../service/APIEndPoint';
 import {ILimit} from '../model/ILimit';
 
 const LIMIT_IN_MENU:ILimit = {
@@ -13,15 +13,15 @@ export class ProjectListController {
   projects:IProject[];
   
   constructor(
-    private projectResource:ProjectDataResource,
+    private apiEndPoint:APIEndPoint,
     private $uibModal:IModalService) {
-      projectResource.query(LIMIT_IN_MENU, (resp:IProject[])=>{
+      apiEndPoint.projectResource.query(LIMIT_IN_MENU, (resp:IProject[])=>{
         this.projects = resp;
       })
   }
 
   createProject(prjName:String) {
-    let resource = new this.projectResource({'name' : prjName});
+    let resource = new this.apiEndPoint.projectResource({'name' : prjName});
     resource.$save((resp:IProject,r:any) => {
       if(resp.prjId) {
         this.projects.push(resp);

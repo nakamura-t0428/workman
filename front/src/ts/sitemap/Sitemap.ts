@@ -6,9 +6,7 @@ import IUrlRouterProvider= ng.ui.IUrlRouterProvider;
 import IHttpProvider = angular.IHttpProvider;
 import IStorageService = angular.storage.IStorageService;
 
-import {MyInfoResource} from '../resource/MyInfoResource';
 import {AuthService} from '../service/AuthService';
-import {MyInfoFactory} from '../factory/MyInfoFactory'
 import {IMyInfoResp} from "../model/IMyInfoResp";
 import {InviteController} from "../controller/InviteController";
 import {SignUpController} from "../controller/SignUpController";

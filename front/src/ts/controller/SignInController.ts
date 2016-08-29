@@ -2,14 +2,14 @@
 
 import IStateService = angular.ui.IStateService;
 import IStateParamsService = angular.ui.IStateParamsService;
+import {APIEndPoint} from '../service/APIEndPoint';
 import {ISignInData} from '../model/ISignInData'
 import {ISignInRespData} from '../model/ISignInRespData';
-import {SignInDataResource} from '../resource/SignInDataResource'
 import {PostControllerBase} from './PostControllerBase';
 
 
 export class SignInController
-  extends PostControllerBase<ISignInData, SignInDataResource, ISignInRespData> {
+  extends PostControllerBase<ISignInData, ISignInRespData> {
     
   data: ISignInData = {
     email: '',
@@ -18,9 +18,9 @@ export class SignInController
   
   constructor(
     private $state:IStateService,
-    private signInDataResource: SignInDataResource
+    private apiEndPoint: APIEndPoint
   ) {
-    super(signInDataResource);
+    super(apiEndPoint.signinResource);
   }
   
   onSubmitSuccess(resp:ISignInRespData, r:any):void {

@@ -2,13 +2,13 @@
 
 import IStateService = angular.ui.IStateService;
 import IStateParamsService = angular.ui.IStateParamsService;
-import {InviteDataResource} from '../resource/InviteDataResource'
+import {APIEndPoint} from '../service/APIEndPoint';
 import {PostControllerBase} from './PostControllerBase';
 import {IInviteRespData} from '../model/IInviteRespData';
 import {IInviteData} from '../model/IInviteData';
 
 export class InviteController
-  extends PostControllerBase<IInviteData, InviteDataResource, IInviteRespData> {
+  extends PostControllerBase<IInviteData, IInviteRespData> {
   data: IInviteData = {
     email: ''
   };
@@ -23,9 +23,9 @@ export class InviteController
 
   constructor(
     private $state:IStateService,
-    private inviteDataResource: InviteDataResource
+    private apiEndPoint: APIEndPoint
   ) {
-    super(inviteDataResource);
+    super(apiEndPoint.inviteResource);
   }
   
   onSubmitSuccess(resp:IInviteRespData, r:any):void {

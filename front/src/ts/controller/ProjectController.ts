@@ -4,8 +4,8 @@ import IStateService = angular.ui.IStateService;
 import IStateParamsService = angular.ui.IStateParamsService;
 import IModalService = angular.ui.bootstrap.IModalService;
 import IScope = angular.IScope
+import {APIEndPoint} from '../service/APIEndPoint';
 import {IProjectDetail} from '../model/IProjectData';
-import {ProjectDataResource} from '../resource/ProjectDataResource';
 import {IBaseRespData} from '../model/IBaseRespData';
 import {UserController} from './UserController';
 
@@ -24,12 +24,12 @@ export class ProjectController {
   }
 
   constructor(
-    private projectResource:ProjectDataResource,
+    private apiEndPoint:APIEndPoint,
     private $state:IStateService,
     private $stateParams:IStateParamsService,
     private $uibModal:IModalService,
     private $scope:ProjectControllerScope) {
-      projectResource.get({'prjId':$stateParams['prjId']}, (resp:IProjectDetail)=>{
+      apiEndPoint.projectResource.get({'prjId':$stateParams['prjId']}, (resp:IProjectDetail)=>{
         this.project = resp;
         $scope['userCtrl'].topMenu = [
           {
@@ -75,7 +75,7 @@ export class ProjectController {
   }
 
   deleteProject() {
-    this.projectResource.delete({'prjId':this.project.prjInfo.prjId}, (resp:IBaseRespData)=>{
+    this.apiEndPoint.projectResource.delete({'prjId':this.project.prjInfo.prjId}, (resp:IBaseRespData)=>{
       this.$state.go('user.top', {}, {reload: true});
     });
   }

@@ -3,7 +3,7 @@
 import IStateService = angular.ui.IStateService;
 import IStorageService = angular.storage.IStorageService;
 
-import {MyInfoResource} from '../resource/MyInfoResource';
+import {APIEndPoint} from '../service/APIEndPoint';
 import {IMyInfoResp} from '../model/IMyInfoResp';
 import {ITopMenu} from '../model/ITopMenu';
 
@@ -24,7 +24,7 @@ export class UserController {
       abstract: true,
       url: '/user',
       templateUrl: 'user/base.html',
-      controller: ['$state', '$localStorage', 'myInfoResource', UserController],
+      controller: ['$state', '$localStorage', 'apiEndPoint', UserController],
       controllerAs: 'userCtrl'
     };
   }
@@ -32,9 +32,9 @@ export class UserController {
   constructor(
     private $state:IStateService,
     private $localStorage:IStorageService,
-    private myInfoResource:MyInfoResource) {
+    private apiEndPoint:APIEndPoint) {
       console.log('userCtrl');
-      myInfoResource.get((resp:IMyInfoResp) => {
+      apiEndPoint.myinfoResource.get((resp:IMyInfoResp) => {
         console.log(resp);
         this.myInfo = resp;
         if(!resp || !resp.success) {

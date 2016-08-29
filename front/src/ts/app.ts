@@ -18,42 +18,30 @@ let app = angular.module('main.app', ['ngResource', 'ngStorage', 'ngAnimate', 'u
 import {ConfigService} from "./service/ConfigService";
 app.factory('config', [() => new ConfigService()]);
 
-//////////////////////////////////////////////////////// Resource
-import {SignInDataResourceFactory, SignInDataResource} from './resource/SignInDataResource';
-app.factory('signInDataResource', ['config', '$resource', SignInDataResourceFactory]);
-
-import {SignUpDataResourceFactory, SignUpDataResource} from './resource/SignUpDataResource';
-app.factory('signUpDataResource', ['config', '$resource', SignUpDataResourceFactory]);
-
-import {MyInfoResourceFactory, MyInfoResource} from './resource/MyInfoResource';
-app.factory('myInfoResource', ['config', '$resource', MyInfoResourceFactory]);
-
-import {InviteDataResourceFactory, InviteDataResource} from './resource/InviteDataResource';
-app.factory('inviteDataResource', ['config', '$resource', InviteDataResourceFactory]);
-
-import {ProjectDataResourceFactory, ProjectDataResource} from './resource/ProjectDataResource';
-app.factory('projectDataResource', ['config', '$resource', ProjectDataResourceFactory]);
+//////////////////////////////////////////////////////// Factory
+import {APIEndPoint} from './service/APIEndPoint';
+app.factory('apiEndPoint', ['config', '$resource', APIEndPoint.factory])
 
 //////////////////////////////////////////////////////// Controller
 import {SignInController} from './controller/SignInController';
-app.controller('signInController', ['$state', 'signInDataResource',
-  ($state:IStateService, signInDataResource: SignInDataResource) =>
-    new SignInController($state, signInDataResource)]);
+app.controller('signInController', ['$state', 'apiEndPoint',
+  ($state:IStateService, apiEndPoint:APIEndPoint) =>
+    new SignInController($state, apiEndPoint)]);
 
 import {SignUpController} from './controller/SignUpController';
-app.controller('signUpController', ['$state', '$stateParams', 'signUpDataResource',
-  ($state:IStateService, $stateParams: IStateParamsService, signUpDataResource: SignUpDataResource) =>
-    new SignUpController($state, $stateParams, signUpDataResource)]);
+app.controller('signUpController', ['$state', '$stateParams', 'apiEndPoint',
+  ($state:IStateService, $stateParams: IStateParamsService, apiEndPoint: APIEndPoint) =>
+    new SignUpController($state, $stateParams, apiEndPoint)]);
 
 import {InviteController} from './controller/InviteController';
-app.controller('inviteController', ['$state', 'inviteDataResource',
-  ($state:IStateService, inviteDataResource: InviteDataResource) =>
-    new InviteController($state, inviteDataResource)]);
+app.controller('inviteController', ['$state', 'apiEndPoint',
+  ($state:IStateService, apiEndPoint: APIEndPoint) =>
+    new InviteController($state, apiEndPoint)]);
 
 import {ProjectListController} from './controller/ProjectListController';
-app.controller('projectListController', ['projectDataResource', '$uibModal',
-  (projectDataResource: ProjectDataResource, $uibModal: IModalService) =>
-    new ProjectListController(projectDataResource, $uibModal)]);
+app.controller('projectListController', ['apiEndPoint', '$uibModal',
+  (apiEndPoint: APIEndPoint, $uibModal: IModalService) =>
+    new ProjectListController(apiEndPoint, $uibModal)]);
 
 import {PrjEditDlgController} from './controller/PrjEditDlgController';
 app.controller('prjEditDlgController', ['$uibModalInstance',
@@ -67,9 +55,9 @@ app.controller('prjDeleteDlgController', ['$uibModalInstance', 'project',
     new PrjDeleteDlgController($uibModalInstance, project)]);
 
 import {ProjectController, ProjectControllerScope} from './controller/ProjectController';
-app.controller('projectController', ['projectDataResource', '$state', '$stateParams', '$uibModal', '$scope',
-  (projectResource: ProjectDataResource, $state:IStateService, $stateParams: IStateParamsService, $uibModal: IModalService, $scope: ProjectControllerScope) =>
-    new ProjectController(projectResource, $state, $stateParams, $uibModal, $scope)]);
+app.controller('projectController', ['apiEndPoint', '$state', '$stateParams', '$uibModal', '$scope',
+  (apiEndPoint: APIEndPoint, $state:IStateService, $stateParams: IStateParamsService, $uibModal: IModalService, $scope: ProjectControllerScope) =>
+    new ProjectController(apiEndPoint, $state, $stateParams, $uibModal, $scope)]);
 
 // import {GuestController} from './controller/GuestController';
 // import {IMyInfoResp} from './model/IMyInfoResp';

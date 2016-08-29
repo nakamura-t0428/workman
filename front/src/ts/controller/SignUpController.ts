@@ -2,13 +2,13 @@
 
 import IStateService = angular.ui.IStateService;
 import IStateParamsService = angular.ui.IStateParamsService;
+import {APIEndPoint} from '../service/APIEndPoint';
 import {ISignUpData} from '../model/ISignUpData';
 import {ISignUpRespData} from '../model/ISignUpRespData';
-import {SignUpDataResource} from '../resource/SignUpDataResource';
 import {PostControllerBase} from './PostControllerBase';
 
 export class SignUpController
-  extends PostControllerBase<ISignUpData, SignUpDataResource, ISignUpRespData> {
+  extends PostControllerBase<ISignUpData, ISignUpRespData> {
     
   data: ISignUpData = {
     token: '',
@@ -27,9 +27,9 @@ export class SignUpController
   constructor(
     private $state:IStateService,
     private $stateParams:IStateParamsService,
-    private signUpDataResource:SignUpDataResource
+    private apiEndPoint:APIEndPoint
   ) {
-    super(signUpDataResource);
+    super(apiEndPoint.signupResource);
     this.data.token = $stateParams['token'];
   }
   
