@@ -2,7 +2,7 @@ package workman.api.jwt
 
 import com.nimbusds.jwt.JWTClaimsSet
 import scala.concurrent.duration.DurationInt
-import github.nakamura_t0428.util.helper.UUIDHelper
+import workman.util.helper.UUIDHelper
 import scala.concurrent.duration.Duration
 
 object TmpAuthJWT extends JWTBase {

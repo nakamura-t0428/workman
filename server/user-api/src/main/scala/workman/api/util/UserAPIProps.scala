@@ -2,7 +2,7 @@ package workman.api.util
 
 import scala.util.Try
 import scala.concurrent.duration.{Duration, DurationInt}
-import github.nakamura_t0428.util.helper.PropertyHelper
+import workman.util.helper.PropertyHelper
 import com.typesafe.scalalogging.LazyLogging
 
 object UserAPIProps extends LazyLogging{

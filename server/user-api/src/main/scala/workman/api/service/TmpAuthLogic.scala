@@ -2,7 +2,7 @@ package workman.api.service
 
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
-import github.nakamura_t0428.mail.MailUtil
+import workman.api.util.MailUtil
 import workman.api.jwt.TmpAuthJWT
 import workman.api.util.UserAPIProps
 import workman.api.mail.InvitationMail
