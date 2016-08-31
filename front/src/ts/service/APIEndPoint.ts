@@ -2,7 +2,8 @@
 
 import IResourceService = ng.resource.IResourceService;
 import {Constants} from '../config/Constants';
-
+import {IMyInfoResp} from '../model/IMyInfoResp';
+import {IProjectDetail} from '../model/IProjectData';
 
 export class APIEndPoint {
   constructor(

@@ -31,6 +31,10 @@ app.controller('prjDeleteDlgController', ['$uibModalInstance', 'project', PrjDel
 import {ProjectController, ProjectControllerScope} from './controller/ProjectController';
 app.controller('projectController', ['apiEndPoint', '$state', '$stateParams', '$uibModal', '$scope', ProjectController]);
 
+////////////////////////////////////////////////////////// Directive
+import {StateLocDirective} from './directive/StateLocDirective';
+app.directive('stateLoc', StateLocDirective.factory);
+
 ////////////////////////////////////////////////////////// Config    
 import {Sitemap} from './sitemap/Sitemap';
 app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', Sitemap.factory]);

@@ -1,5 +1,6 @@
 /// <reference path="../../../typings/tsd.d.ts"/>
 
+import IResource = ng.resource.IResource;
 import IStateService = angular.ui.IStateService;
 import IStateParamsService = angular.ui.IStateParamsService;
 import IModalService = angular.ui.bootstrap.IModalService;
@@ -8,18 +9,36 @@ import {APIEndPoint} from '../service/APIEndPoint';
 import {IProjectDetail} from '../model/IProjectData';
 import {IBaseRespData} from '../model/IBaseRespData';
 import {UserController} from './UserController';
+import {ILocState} from '../model/ILocState';
 
 export interface ProjectControllerScope extends IScope {
   userCtrl: UserController
 }
 
 export class ProjectController {
-  public project:IProjectDetail;
   
   public static get state() {
     return {
       url: '/project/:prjId',
       templateUrl: 'user/project/projectDetail.html',
+      resolve: {
+        prjInfo: ['$state', '$stateParams', 'apiEndPoint', function($state:IStateService, $stateParams:IStateParamsService, apiEndPoint:APIEndPoint) {
+          return apiEndPoint.projectResource.get({'prjId':$stateParams['prjId']}, (r:IProjectDetail)=>{
+          }, (e:any)=>{}).$promise;
+        }],
+        loc: ['prjInfo' ,function(prjInfo:IResource<IProjectDetail>) {
+          return prjInfo.$promise.then((r:IProjectDetail)=> {
+            return {
+              label: r.prjInfo.name,
+              state: 'user.top.project',
+              desc: '',
+              stateParams: {prjId: r.prjInfo.prjId}
+            };
+          });
+        }],
+      },
+      controller: ['apiEndPoint', '$state', '$stateParams', '$uibModal', '$scope', 'prjInfo', ProjectController],
+      controllerAs: 'prjCtrl',
     };
   }
 
@@ -28,10 +47,10 @@ export class ProjectController {
     private $state:IStateService,
     private $stateParams:IStateParamsService,
     private $uibModal:IModalService,
-    private $scope:ProjectControllerScope) {
+    private $scope:ProjectControllerScope,
+    public project:IProjectDetail) {
       apiEndPoint.projectResource.get({'prjId':$stateParams['prjId']}, (resp:IProjectDetail)=>{
-        this.project = resp;
-        $scope['userCtrl'].topMenu = [
+        $scope.userCtrl.topMenu = [
           {
             label: 'サイトマップ',
             desc: '',
@@ -43,12 +62,6 @@ export class ProjectController {
             state: 'user.top.project.member'
           }
         ]
-        $scope['userCtrl'].loc = {
-          label: this.project.prjInfo.name,
-          state: 'user.top.project',
-          desc: '',
-          stateParams: {prjId: this.project.prjInfo.prjId}
-        };
       })
   }
 

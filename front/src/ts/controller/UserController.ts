@@ -1,5 +1,6 @@
 /// <reference path="../../../typings/tsd.d.ts"/>
 
+import IState = angular.ui.IState;
 import IStateService = angular.ui.IStateService;
 import IStorageService = angular.storage.IStorageService;
 
@@ -10,13 +11,6 @@ import {ITopMenu} from '../model/ITopMenu';
 const GUEST_TOP_ST = 'guest.top';
 
 export class UserController {
-  public myInfo:IMyInfoResp;
-  public loc:ITopMenu = {
-    label: 'ダッシュボード',
-    state: 'user.top',
-    desc: ''
-  }
-
   public topMenu:Array<ITopMenu> = [];
   
   public static get state() {
@@ -24,26 +18,51 @@ export class UserController {
       abstract: true,
       url: '/user',
       templateUrl: 'user/base.html',
-      controller: ['$state', '$localStorage', 'apiEndPoint', UserController],
+      resolve: {
+        myInfo: ['$state', 'apiEndPoint', function($state:IStateService ,apiEndPoint:APIEndPoint) {
+          console.log('userCtrl');
+          return apiEndPoint.myinfoResource.get({},
+            (r:IMyInfoResp) => {
+              if(!r || !r.success) {
+                $state.go(GUEST_TOP_ST);
+              }
+            },
+            (e:any) => {
+              $state.go(GUEST_TOP_ST);
+            });
+        }],
+        loc: function() {
+          return {
+            label: 'ダッシュボード',
+            state: 'user.top',
+            desc: ''
+          };
+        }
+      },
+      controller: ['$state', '$localStorage', 'apiEndPoint', 'myInfo', UserController],
       controllerAs: 'userCtrl'
     };
+  }
+
+  public static get topState():IState {
+    return {
+      url: '/top',
+      views: {
+        'left-menu': {
+          templateUrl: 'user/left-menu.html',
+        },
+        'main-contents': {
+          templateUrl: 'user/top.html'
+        },
+      },
+    }      
   }
 
   constructor(
     private $state:IStateService,
     private $localStorage:IStorageService,
-    private apiEndPoint:APIEndPoint) {
-      console.log('userCtrl');
-      apiEndPoint.myinfoResource.get((resp:IMyInfoResp) => {
-        console.log(resp);
-        this.myInfo = resp;
-        if(!resp || !resp.success) {
-          this.$state.go(GUEST_TOP_ST);
-        }
-      }, (e:any) => {
-        this.$state.go(GUEST_TOP_ST);
-      });
-  }
+    private apiEndPoint:APIEndPoint,
+    public myInfo:IMyInfoResp) {}
   
   signOut() {
     this.$localStorage.$reset();

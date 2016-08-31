@@ -29,17 +29,7 @@ export class Sitemap {
     .state('guest.invite', InviteController.state) //ゲスト画面 登録申請
     .state('guest.signup', SignUpController.state) //ゲスト画面 本登録
     .state('user', UserController.state) //ユーザ 基礎
-    .state('user.top', { // ユーザ トップ
-      url: '/top',
-      views: {
-        'left-menu': {
-          templateUrl: 'user/left-menu.html',
-        },
-        'main-contents': {
-          templateUrl: 'user/top.html'
-        },
-      },
-    })
+    .state('user.top', UserController.topState)//ユーザ トップ
     .state('user.top.project', ProjectController.state) // ユーザ プロジェクト
     .state('user.top.project.sitemap', { // ユーザ プロジェクト
       url: '/sitemap',
