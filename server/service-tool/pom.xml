@@ -17,12 +17,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>github.nakamura_t0428</groupId>
-      <artifactId>common-util</artifactId>
-      <version>${shift.commonlib.version}</version>
-    </dependency>
-
-    <dependency>
       <groupId>${project.parent.groupId}</groupId>
       <artifactId>service-data</artifactId>
       <version>${project.parent.version}</version>

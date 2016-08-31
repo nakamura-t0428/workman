@@ -16,18 +16,6 @@
       <artifactId>scala-library</artifactId>
       <version>${scala.version}</version>
     </dependency>
-
-    <dependency>
-      <groupId>github.nakamura_t0428</groupId>
-      <artifactId>common-util</artifactId>
-      <version>${shift.commonlib.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>github.nakamura_t0428</groupId>
-      <artifactId>common-mail</artifactId>
-      <version>${shift.commonlib.version}</version>
-    </dependency>
-    
     <!-- Service DB -->
     <dependency>
       <groupId>${project.parent.groupId}</groupId>
