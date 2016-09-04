@@ -10,6 +10,7 @@ import {IProjectDetail} from '../model/IProjectData';
 import {IBaseRespData} from '../model/IBaseRespData';
 import {UserController} from './UserController';
 import {ILocState} from '../model/ILocState';
+import {ITopMenu} from '../model/ITopMenu';
 
 export interface ProjectControllerScope extends IScope {
   userCtrl: UserController
@@ -24,7 +25,7 @@ export class ProjectController {
       resolve: {
         prjInfo: ['$state', '$stateParams', 'apiEndPoint', function($state:IStateService, $stateParams:IStateParamsService, apiEndPoint:APIEndPoint) {
           return apiEndPoint.projectResource.get({'prjId':$stateParams['prjId']}, (r:IProjectDetail)=>{
-          }, (e:any)=>{}).$promise;
+          }, (e:any)=>{});
         }],
         loc: ['prjInfo' ,function(prjInfo:IResource<IProjectDetail>) {
           return prjInfo.$promise.then((r:IProjectDetail)=> {
@@ -36,6 +37,20 @@ export class ProjectController {
             };
           });
         }],
+        topMenu: function():Array<ITopMenu> {
+          return [
+            {
+              label: 'サイトマップ',
+              desc: '',
+              state: 'user.top.project.sitemap'
+            },
+            {
+              label: 'メンバー',
+              desc: '',
+              state: 'user.top.project.member'
+            }
+          ];
+        }
       },
       controller: ['apiEndPoint', '$state', '$stateParams', '$uibModal', '$scope', 'prjInfo', ProjectController],
       controllerAs: 'prjCtrl',
@@ -49,20 +64,6 @@ export class ProjectController {
     private $uibModal:IModalService,
     private $scope:ProjectControllerScope,
     public project:IProjectDetail) {
-      apiEndPoint.projectResource.get({'prjId':$stateParams['prjId']}, (resp:IProjectDetail)=>{
-        $scope.userCtrl.topMenu = [
-          {
-            label: 'サイトマップ',
-            desc: '',
-            state: 'user.top.project.sitemap'
-          },
-          {
-            label: 'メンバー',
-            desc: '',
-            state: 'user.top.project.member'
-          }
-        ]
-      })
   }
 
   isDeletable() {

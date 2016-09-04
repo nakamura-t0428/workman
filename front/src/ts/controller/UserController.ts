@@ -11,8 +11,6 @@ import {ITopMenu} from '../model/ITopMenu';
 const GUEST_TOP_ST = 'guest.top';
 
 export class UserController {
-  public topMenu:Array<ITopMenu> = [];
-  
   public static get state() {
     return {
       abstract: true,
@@ -37,6 +35,9 @@ export class UserController {
             state: 'user.top',
             desc: ''
           };
+        },
+        topMenu: function():Array<ITopMenu> {
+          return [];
         }
       },
       controller: ['$state', '$localStorage', 'apiEndPoint', 'myInfo', UserController],

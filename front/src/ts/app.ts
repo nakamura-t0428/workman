@@ -34,6 +34,8 @@ app.controller('projectController', ['apiEndPoint', '$state', '$stateParams', '$
 ////////////////////////////////////////////////////////// Directive
 import {StateLocDirective} from './directive/StateLocDirective';
 app.directive('stateLoc', StateLocDirective.factory);
+import {TopMenuDirective} from './directive/TopMenuDirective';
+app.directive('topMenu', TopMenuDirective.factory);
 
 ////////////////////////////////////////////////////////// Config    
 import {Sitemap} from './sitemap/Sitemap';

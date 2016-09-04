@@ -14,9 +14,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="head-nav-menu">
       <ul class="nav navbar-nav">
-        <li ng-repeat="menu in userCtrl.topMenu" ui-sref-active="active" >
-          <a ui-sref="{{menu.state}}">{{menu.label}}</a>
-        </li>
+        <top-menu />
       </ul>
       <ul class="nav navbar-form navbar-right">
         <li uib-dropdown on-toggle="toggled(open)">
