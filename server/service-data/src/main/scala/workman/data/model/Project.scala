@@ -7,6 +7,7 @@ case class Project(
     name:String,
     ownerId:String,
     regDate:Timestamp,
+    disabled:Boolean,
     permManager:Int = ProjectPermission.defaultManager,
     permMember:Int = ProjectPermission.defaultMember,
     permGuest:Int = ProjectPermission.defaultGuest
