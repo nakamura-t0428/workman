@@ -1,40 +1,62 @@
 package workman.data.service
 
 import workman.data.db.ServiceDb
-import workman.data.dto.ProjectReg
+import workman.data.model._
+import workman.data.dto._
 import workman.util.helper.UUIDHelper
-import workman.data.model.Project
 import workman.util.helper.DateHelper.now
 import scala.concurrent.ExecutionContext.Implicits.global
-import workman.data.dto.ProjectInfo
-import workman.data.dto.UserInfo
-import workman.data.dto.ProjectInfo
-import workman.data.dto.UserInfo
 import scala.concurrent.Future
-import workman.data.dto.Limit
-import workman.data.dto.DefaultLimit
-import workman.data.dto.MemberInfo
 
 class ProjectService(val dbm:ServiceDb) {
   import dbm.db
   import dbm.driver.api._
   
-  def createProject(prjReg:ProjectReg) = {
+  def createCompany(reg:CompanyReg) = {
+    val comp = Company(
+        compId = UUIDHelper.uuidAsBase64,
+        name = reg.name,
+        description = reg.desc,
+        regDate = now
+        )
+    val q = dbm.companyTbl += comp
+    db.run(q.map(_ => comp))
+  }
+  
+  def updateCompany(reg:CompanyBaseUpdate) = {
+    val q = dbm.companyTbl.filter(_.compId === reg.compId).map(c => (c.name, c.description))
+    db.run(q.update(reg.name, reg.description))
+  }
+  
+  def searchCompany(name:String) = {
+    val q = dbm.companyTbl.filter(_.name like s"%${name}%").sortBy(_.name)
+    val res = q.result.map(_.map(c => CompanyInfo(c.compId, c.name, c.description, c.regDate)))
+    db.run(res)
+  }
+  
+  def createProject(reg:ProjectReg) = {
     val prj = Project(
-        UUIDHelper.uuidAsBase64,
-        prjReg.name,
-        prjReg.ownerId,
-        now
+        prjId = UUIDHelper.uuidAsBase64,
+        name = reg.name,
+        description = reg.description,
+        compId = reg.compId,
+        ownerId = reg.ownerId,
+        regDate = now
         )
     val q = dbm.projectTbl += prj
     db.run(q.map(_ => prj))
+  }
+  
+  def updateProject(reg:ProjectBaseUpdate) = {
+    val q = dbm.projectTbl.filter(_.prjId === reg.prjId).map(c => (c.name, c.description, c.compId))
+    db.run(q.update(reg.name, reg.description, reg.compId))
   }
   
   def ownProjects(userId:String, limit:Limit):Future[Seq[ProjectInfo]] = {
     val q = for{
       prj <- dbm.projectTbl if prj.ownerId === userId
       owner <- dbm.userTbl if owner.userId === prj.ownerId
-    } yield (prj.prjId, prj.prjName, owner.userId, owner.name, prj.regDate)
+    } yield (prj.prjId, prj.name, owner.userId, owner.name, prj.regDate)
     
     val res = q.sortBy(_._5).drop(limit.limit * limit.page).take(limit.limit)
       .result.map(_.map{case (prjId, prjName, ownerId, ownerName, regDate) =>
@@ -47,12 +69,12 @@ class ProjectService(val dbm:ServiceDb) {
     val q1 = for{
       prj <- dbm.projectTbl if prj.ownerId === userId
       owner <- dbm.userTbl if owner.userId === prj.ownerId
-    } yield (prj.prjId, prj.prjName, owner.userId, owner.name, prj.regDate)
+    } yield (prj.prjId, prj.name, owner.userId, owner.name, prj.regDate)
     val q2 = for{
       prjUser <- dbm.PrjUserTbl if prjUser.userId === userId
       prj <- dbm.projectTbl if prj.prjId === prjUser.prjId
       owner <- dbm.userTbl if owner.userId === prj.ownerId
-    } yield (prj.prjId, prj.prjName, owner.userId, owner.name, prj.regDate)
+    } yield (prj.prjId, prj.name, owner.userId, owner.name, prj.regDate)
     
     val q = {q1 union q2}.distinctOn(_._1).sortBy(_._5)
     
@@ -67,7 +89,7 @@ class ProjectService(val dbm:ServiceDb) {
     val qPrj = for{
       prj <- dbm.projectTbl if prj.prjId === prjId
       owner <- dbm.userTbl if owner.userId === prj.ownerId
-    } yield (prj.prjId, prj.prjName, owner.userId, owner.name, prj.regDate)
+    } yield (prj.prjId, prj.name, owner.userId, owner.name, prj.regDate)
     val qMem = for{
       prjUser <- dbm.PrjUserTbl if prjUser.prjId === prjId
       member <- dbm.userTbl if member.userId === prjUser.userId

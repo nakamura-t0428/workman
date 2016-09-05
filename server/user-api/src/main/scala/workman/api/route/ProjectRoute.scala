@@ -19,6 +19,7 @@ import workman.api.json.response._
 import spray.http.StatusCodes
 import spray.util.LoggingContext
 import workman.data.dto.Limit
+import workman.data.dto.CompanyReg
 
 trait ProjectRoute extends HttpService with LazyLogging {
   implicit def exceptionHandler(implicit log:LoggingContext):ExceptionHandler
@@ -45,11 +46,47 @@ trait ProjectRoute extends HttpService with LazyLogging {
         }
       }
     }
+    pathPrefix("company") {
+      pathEnd {
+        post{
+          companyCreate()
+        } ~
+        get{
+          companySearch()
+        }
+      }
+    }
   }
+  
+  def companyCreate() =
+    entity(as[CompanyRegister]) {comp =>
+      onComplete(db.projectService.createCompany(CompanyReg(comp.name, comp.description))) {
+        case Success(c) => complete{
+          CompanyInfoResp(c.compId, c.name, c.description)
+        }
+        case Failure(e) => complete {
+          logger.error("SystemError", e)
+          SysErrMessage()
+        }
+      }
+    }
+  
+  def companySearch() =
+    entity(as[CompanySearch]) {q =>
+      onComplete(db.projectService.searchCompany(q.name)) {
+        case Success(lst) => complete{
+          CompanyList(lst.map(c => CompanyInfoResp(c.compId, c.name, c.desc)).toList)
+        }
+        case Failure(e) => complete{
+          logger.error("SystemError", e)
+          SysErrMessage()
+        }
+      }
+    }
   
   def prjCreate(userId:String) =
     entity(as[ProjectRegister]) {prj => 
-      onComplete(db.projectService.createProject(ProjectReg(prj.name, userId))) {
+      onComplete(db.projectService.createProject(ProjectReg(prj.name, prj.description, userId, prj.compId))) {
         case Success(p) => complete{
           ProjectInfoResponse(prjId = p.prjId, name = p.name)
         }

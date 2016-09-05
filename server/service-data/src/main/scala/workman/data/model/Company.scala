@@ -7,5 +7,5 @@ case class Company(
     name:String,
     description:String,
     regDate:Timestamp,
-    disabled:Boolean
+    disabled:Boolean = false
     )

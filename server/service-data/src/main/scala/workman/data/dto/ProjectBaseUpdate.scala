@@ -1,8 +1,8 @@
 package workman.data.dto
 
-case class ProjectReg(
+case class ProjectBaseUpdate(
+    prjId:String,
     name:String,
     description:String,
-    ownerId:String,
     compId:String
     )

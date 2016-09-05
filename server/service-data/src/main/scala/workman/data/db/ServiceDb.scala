@@ -8,3 +8,4 @@ extends DbBase("/testportal-db", runMode)
 with UserT
 with ProjectT
 with ProjectUserT
+with CompanyT
