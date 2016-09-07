@@ -9,7 +9,7 @@ import workman.api.util.CustomDirectives.{TokenHeader}
 import workman.api.util.UserAPIProps._
 import spray.util.LoggingContext
 
-class UserApiActor extends Actor with AuthRoute with ProjectRoute{
+class UserApiActor extends Actor with TestRoute with AuthRoute with ProjectRoute {
   implicit override def exceptionHandler(implicit log:LoggingContext) = ExceptionHandler {
     case e: Throwable =>
       requestUri { uri =>
@@ -43,7 +43,7 @@ class UserApiActor extends Actor with AuthRoute with ProjectRoute{
         options {
           complete {StatusCodes.OK}
         } ~
-        authRoute ~ projectRoute
+        testRoute ~ authRoute ~ projectRoute
       }
     )
 }

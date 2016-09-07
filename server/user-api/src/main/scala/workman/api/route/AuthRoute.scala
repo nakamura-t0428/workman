@@ -126,14 +126,6 @@ trait AuthRoute extends HttpService with LazyLogging {
             }
           }
         }
-      } ~
-      path("test") {
-        get {
-          complete {
-            ProjectInfoResponse("1", "テストプロジェクト1")
-          }
-        }
-        
       }
     }
 }
