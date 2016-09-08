@@ -54,6 +54,13 @@ trait ProjectRoute extends HttpService with LazyLogging {
         get{
           companySearch()
         }
+      } ~
+      {
+        path(Rest) { compId =>
+          get {
+            companyDetail(compId)
+          }
+        }
       }
     }
   }
@@ -72,7 +79,7 @@ trait ProjectRoute extends HttpService with LazyLogging {
     }
   
   def companySearch() =
-    entity(as[CompanySearch]) {q =>
+    parameters('name.as[String], 'limit.as[Int], 'page.as[Int]).as(CompanySearch) {q =>
       onComplete(db.projectService.searchCompany(q.name)) {
         case Success(lst) => complete{
           CompanyList(lst.map(c => CompanyInfoResp(c.compId, c.name, c.desc)).toList)
@@ -83,6 +90,16 @@ trait ProjectRoute extends HttpService with LazyLogging {
         }
       }
     }
+  def companyDetail(compId:String) = onComplete(db.projectService.getCompany(compId)) {
+    case Success(Some(c)) => complete{
+      CompanyInfoResp(c.compId, c.name, c.description)
+    }
+    case Success(_) => complete{StatusCodes.NotFound}
+    case Failure(e) => complete{
+      logger.error("SystemError", e)
+      SysErrMessage()
+    }
+  }
   
   def prjCreate(userId:String) =
     entity(as[ProjectRegister]) {prj => 

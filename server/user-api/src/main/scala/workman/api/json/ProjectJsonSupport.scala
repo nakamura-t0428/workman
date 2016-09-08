@@ -10,7 +10,7 @@ object ProjectJsonSupport extends DefaultJsonProtocol {
   
   implicit val companyRegisterFomatter = jsonFormat2(CompanyRegister)
   implicit val companyRegisterRespFormatter = jsonFormat3(CompanyInfoResp)
-  implicit val companySearchFormatter = jsonFormat1(CompanySearch)
+  implicit val companySearchFormatter = jsonFormat3(CompanySearch)
   implicit object CompanyListFormatter extends RootJsonFormat[CompanyList] {
     def read(value:JsValue) = CompanyList(value.convertTo[List[CompanyInfoResp]])
     def write(obj:CompanyList) = obj.datas.toJson

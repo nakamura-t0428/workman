@@ -36,6 +36,8 @@ import {StateLocDirective} from './directive/StateLocDirective';
 app.directive('stateLoc', StateLocDirective.factory);
 import {TopMenuDirective} from './directive/TopMenuDirective';
 app.directive('topMenu', TopMenuDirective.factory);
+import {CompanyListDirective} from './directive/CompanyListDirective';
+app.directive('companyList', CompanyListDirective.factory);
 
 ////////////////////////////////////////////////////////// Config    
 import {Sitemap} from './sitemap/Sitemap';

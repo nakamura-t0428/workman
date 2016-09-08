@@ -25,6 +25,9 @@ export class APIEndPoint {
   public get projectResource() {
     return this.$resource(Constants.apiPref + '/project/:prjId', {prjId: '@prjId'});
   }
+  public get companyResource() {
+    return this.$resource(Constants.apiPref + '/company/:compId', {compId: '@compId'});
+  }
   public get sitemapResource() {
     return this.$resource(Constants.apiPref + '/sitemap/:siteMapId', {siteMapId: '@siteMapId'});
   }

@@ -6,31 +6,31 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "jquery/jquery.d.ts": {
-      "commit": "084e55916674ff7128722bf72150aa55acea08d9"
+      "commit": "424c424ff4d409ef43abe141019bffc046f96a61"
     },
     "angularjs/angular.d.ts": {
-      "commit": "084e55916674ff7128722bf72150aa55acea08d9"
+      "commit": "424c424ff4d409ef43abe141019bffc046f96a61"
     },
     "angularjs/angular-mocks.d.ts": {
-      "commit": "084e55916674ff7128722bf72150aa55acea08d9"
+      "commit": "424c424ff4d409ef43abe141019bffc046f96a61"
     },
     "angular-ui-router/angular-ui-router.d.ts": {
-      "commit": "084e55916674ff7128722bf72150aa55acea08d9"
+      "commit": "424c424ff4d409ef43abe141019bffc046f96a61"
     },
     "angularjs/angular-resource.d.ts": {
-      "commit": "084e55916674ff7128722bf72150aa55acea08d9"
+      "commit": "424c424ff4d409ef43abe141019bffc046f96a61"
     },
     "ngstorage/ngstorage.d.ts": {
-      "commit": "084e55916674ff7128722bf72150aa55acea08d9"
+      "commit": "424c424ff4d409ef43abe141019bffc046f96a61"
     },
     "angular-loading-bar/angular-loading-bar.d.ts": {
-      "commit": "084e55916674ff7128722bf72150aa55acea08d9"
+      "commit": "424c424ff4d409ef43abe141019bffc046f96a61"
     },
     "angular-ui-bootstrap/angular-ui-bootstrap.d.ts": {
-      "commit": "084e55916674ff7128722bf72150aa55acea08d9"
+      "commit": "424c424ff4d409ef43abe141019bffc046f96a61"
     },
     "ui-grid/ui-grid.d.ts": {
-      "commit": "084e55916674ff7128722bf72150aa55acea08d9"
+      "commit": "424c424ff4d409ef43abe141019bffc046f96a61"
     }
   }
 }

@@ -29,9 +29,15 @@ class ProjectService(val dbm:ServiceDb) {
   }
   
   def searchCompany(name:String) = {
-    val q = dbm.companyTbl.filter(_.name like s"%${name}%").sortBy(_.name)
-    val res = q.result.map(_.map(c => CompanyInfo(c.compId, c.name, c.description, c.regDate)))
+    val q = if(name.isEmpty()) dbm.companyTbl
+      else dbm.companyTbl.filter(_.name like s"%${name}%")
+    val res = q.sortBy(_.name).result.map(_.map(c => CompanyInfo(c.compId, c.name, c.description, c.regDate)))
     db.run(res)
+  }
+  
+  def getCompany(compId:String) = {
+    val q = dbm.companyTbl.filter(_.compId === compId)
+    db.run(q.result.headOption)
   }
   
   def createProject(reg:ProjectReg) = {
@@ -71,7 +77,7 @@ class ProjectService(val dbm:ServiceDb) {
       owner <- dbm.userTbl if owner.userId === prj.ownerId
     } yield (prj.prjId, prj.name, owner.userId, owner.name, prj.regDate)
     val q2 = for{
-      prjUser <- dbm.PrjUserTbl if prjUser.userId === userId
+      prjUser <- dbm.prjUserTbl if prjUser.userId === userId
       prj <- dbm.projectTbl if prj.prjId === prjUser.prjId
       owner <- dbm.userTbl if owner.userId === prj.ownerId
     } yield (prj.prjId, prj.name, owner.userId, owner.name, prj.regDate)
@@ -91,7 +97,7 @@ class ProjectService(val dbm:ServiceDb) {
       owner <- dbm.userTbl if owner.userId === prj.ownerId
     } yield (prj.prjId, prj.name, owner.userId, owner.name, prj.regDate)
     val qMem = for{
-      prjUser <- dbm.PrjUserTbl if prjUser.prjId === prjId
+      prjUser <- dbm.prjUserTbl if prjUser.prjId === prjId
       member <- dbm.userTbl if member.userId === prjUser.userId
     } yield (member.userId, member.name)
     

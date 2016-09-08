@@ -16,5 +16,5 @@ trait ProjectUserT extends Driver with UserT with ProjectT{
     
     def * = (prjId, userId, role) <> (ProjectUser.tupled, ProjectUser.unapply)
   }
-  val PrjUserTbl = TableQuery[ProjectUsers]
+  val prjUserTbl = TableQuery[ProjectUsers]
 }

@@ -13,7 +13,7 @@ object InitDb extends LazyLogging {
   val dao = new SchemaService(dbm)
   
   def initDb(args:List[String]):Unit = {
-    val res = dao.createTables
+    val res = dao.initTables
     Await.ready(res, DurationInt(30).second)
     
     res.value.get match {
