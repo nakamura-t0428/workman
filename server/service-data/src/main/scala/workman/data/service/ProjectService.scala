@@ -41,6 +41,7 @@ class ProjectService(val dbm:ServiceDb) {
   }
   
   def createProject(reg:ProjectReg) = {
+    println(reg.compId)
     val prj = Project(
         prjId = UUIDHelper.uuidAsBase64,
         name = reg.name,
@@ -49,6 +50,7 @@ class ProjectService(val dbm:ServiceDb) {
         ownerId = reg.ownerId,
         regDate = now
         )
+    println(prj.compId)
     val q = dbm.projectTbl += prj
     db.run(q.map(_ => prj))
   }

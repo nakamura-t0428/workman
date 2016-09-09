@@ -18,13 +18,10 @@ app.controller('signUpController', ['$state', '$stateParams', 'apiEndPoint', Sig
 import {InviteController} from './controller/InviteController';
 app.controller('inviteController', ['$state', 'apiEndPoint', InviteController]);
 
-import {ProjectListController} from './controller/ProjectListController';
-app.controller('projectListController', ['apiEndPoint', '$uibModal', ProjectListController]);
-
 import {PrjEditDlgController} from './controller/PrjEditDlgController';
 app.controller('prjEditDlgController', ['$uibModalInstance', PrjEditDlgController]);
 
-import {IProjectDetail} from './model/IProjectData';
+import {IProjectDetail} from './model/IProject';
 import {PrjDeleteDlgController} from './controller/PrjDeleteDlgController';
 app.controller('prjDeleteDlgController', ['$uibModalInstance', 'project', PrjDeleteDlgController]);
 
@@ -38,6 +35,8 @@ import {TopMenuDirective} from './directive/TopMenuDirective';
 app.directive('topMenu', TopMenuDirective.factory);
 import {CompanyListDirective} from './directive/CompanyListDirective';
 app.directive('companyList', CompanyListDirective.factory);
+import {ProjectListDirective} from './directive/ProjectListDirective';
+app.directive('projectList', ProjectListDirective.factory);
 
 ////////////////////////////////////////////////////////// Config    
 import {Sitemap} from './sitemap/Sitemap';

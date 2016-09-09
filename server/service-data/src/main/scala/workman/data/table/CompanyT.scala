@@ -8,7 +8,7 @@ trait CompanyT extends Driver {
   import driver.api._
   
   class Companies(tag:Tag) extends Table[Company](tag, "COMPANY") {
-    def compId = column[String]("COMP_ID", O.SqlType("CHAR(24)"), O.PrimaryKey)
+    def compId = column[String]("COMP_ID", O.SqlType("VARCHAR(24)"), O.PrimaryKey)
     def name = column[String]("COMP_NAME", O.SqlType("VARCHAR(64)"))
     def description = column[String]("COMP_DESC", O.SqlType("VARCHAR(512)"))
     def regDate = column[Timestamp]("REGDATE", O.SqlType("DATETIME"))

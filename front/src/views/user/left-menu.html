@@ -1,24 +1,12 @@
 <nav>
   <ul class="nav nav-pills nav-stacked">
     <li><a href="">勤怠・実績登録</a></li>
-    <li ng-controller="projectListController as prjListCtrl">
-      <a href>
-        プロジェクト
-      </a>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href ng-click="prjListCtrl.showCreatePrjDlg();"><span class="glyphicon glyphicon-plus"></span> 新規プロジェクト</a></li>
-        <li ui-sref-active="active" ng-repeat="prj in prjListCtrl.projects | limitTo:6"><a ui-sref="user.top.project({ prjId: prj.prjId })">{{prj.name | limitTo:16 }}</a></li>
-      </ul>
-    </li>
+    <project-list />
     <company-list />
-    <li ng-controller="projectListController as prjListCtrl">
+    <li>
       <a href>
         メンバー
       </a>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href ng-click="prjListCtrl.showCreatePrjDlg();"><span class="glyphicon glyphicon-plus"></span> 新規プロジェクト</a></li>
-        <li ui-sref-active="active" ng-repeat="prj in prjListCtrl.projects | limitTo:6"><a ui-sref="user.top.project({ prjId: prj.prjId })">{{prj.name | limitTo:16 }}</a></li>
-      </ul>
     </li>
   </nav>
 </nav>

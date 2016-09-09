@@ -1,11 +1,13 @@
 /// <reference path="../../../typings/tsd.d.ts"/>
 
 import IModalServiceInstance = angular.ui.bootstrap.IModalServiceInstance;
-import {INewProject} from '../model/IProjectData';
+import {INewProject} from '../model/IProject';
 
 export class PrjEditDlgController {
   data:INewProject = {
-    name: ''
+    name: '',
+    compId: '',
+    description: ''
   };
   
   constructor(

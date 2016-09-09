@@ -6,7 +6,7 @@ import IStateParamsService = angular.ui.IStateParamsService;
 import IModalService = angular.ui.bootstrap.IModalService;
 import IScope = angular.IScope
 import {APIEndPoint} from '../service/APIEndPoint';
-import {IProjectDetail} from '../model/IProjectData';
+import {IProjectDetail} from '../model/IProject';
 import {IBaseRespData} from '../model/IBaseRespData';
 import {UserController} from './UserController';
 import {ILocState} from '../model/ILocState';

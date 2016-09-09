@@ -6,8 +6,8 @@ import workman.data.model._
 trait ProjectUserT extends Driver with UserT with ProjectT{
   import driver.api._
   class ProjectUsers(tag:Tag) extends Table[ProjectUser](tag, "PROJECT_USER") {
-    def prjId = column[String]("PRJ_ID", O.SqlType("CHAR(24)"))
-    def userId = column[String]("USER_ID", O.SqlType("CHAR(24)"))
+    def prjId = column[String]("PRJ_ID", O.SqlType("VARCHAR(24)"))
+    def userId = column[String]("USER_ID", O.SqlType("VARCHAR(24)"))
     def role = column[String]("ROLE", O.SqlType("VARCHAR(20)"), O.Default(ProjectUserRole.MEMBER))
     
     def prj = foreignKey("PROJECT_FK", prjId, projectTbl)(_.prjId, onUpdate=ForeignKeyAction.Cascade, onDelete=ForeignKeyAction.Cascade)

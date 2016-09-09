@@ -12,6 +12,7 @@ import {SignUpController} from "../controller/SignUpController";
 import {GuestController} from '../controller/GuestController';
 import {UserController} from '../controller/UserController';
 import {ProjectController} from '../controller/ProjectController';
+import {ProjectCreateController} from '../controller/ProjectCreateController';
 
 export class Sitemap {
   constructor(
@@ -31,6 +32,7 @@ export class Sitemap {
     .state('user', UserController.state) //ユーザ 基礎
     .state('user.top', UserController.topState)//ユーザ トップ
     .state('user.top.project', ProjectController.state) // ユーザ プロジェクト
+    .state('user.top.project-create', ProjectCreateController.state)//新規プロジェクト
     .state('user.top.project.sitemap', { // ユーザ プロジェクト
       url: '/sitemap',
       templateUrl: 'user/project/projectSitemap.html',

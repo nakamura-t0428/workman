@@ -45,7 +45,7 @@ trait ProjectRoute extends HttpService with LazyLogging {
           prjDelete(userId, prjId)
         }
       }
-    }
+    } ~
     pathPrefix("company") {
       pathEnd {
         post{
@@ -114,7 +114,7 @@ trait ProjectRoute extends HttpService with LazyLogging {
       }
     }
   def prjList(userId:String) =
-    parameters("limit".as[Int], "page".as[Int]) {(limit, page) => 
+    parameters('name.as[String].?, 'limit.as[Int], 'page.as[Int]) {(name, limit, page) => 
       val dbRes = db.projectService.myProjects(userId, Limit(limit min 50 , page))
       onComplete(dbRes) {
         case Success(prjs) => complete{
