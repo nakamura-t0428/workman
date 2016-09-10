@@ -14,7 +14,7 @@ import workman.api.json.request._
 object JsonSupport extends DefaultJsonProtocol{
   import spray.json._
   
-  implicit val invitationFormatter = jsonFormat1(Invitation)
-  implicit val resultMessageFormatter = jsonFormat3(ResultMessage)
-  implicit val limitFormatter = jsonFormat2(Limit)
+  implicit val invitationFormatter = jsonFormat1(Invitation.apply)
+  implicit val resultMessageFormatter = jsonFormat3(ResultMessage.apply)
+  implicit val limitFormatter = jsonFormat2(Limit.apply)
 }

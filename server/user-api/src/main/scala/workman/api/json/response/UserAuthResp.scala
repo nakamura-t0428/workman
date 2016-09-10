@@ -1,6 +1,6 @@
 package workman.api.json.response
 
-case class UserAuthResponse(
+case class UserAuthResp(
     success:Boolean,
     token:String,
     email:String,

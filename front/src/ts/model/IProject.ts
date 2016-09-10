@@ -1,10 +1,17 @@
 import {IMember} from './IMemberData'
+import {ICompanyAbs} from './ICompany'
 
 export interface IProject {
   prjId: string;
   name: string;
   compId:string;
   description:string;
+}
+
+export interface IProjectPlan {
+  expectedDays: number;
+  startDate: string;
+  startDateFixed: boolean;
 }
 
 export interface INewProject {
@@ -15,6 +22,8 @@ export interface INewProject {
 
 export interface IProjectDetail {
   prjInfo: IProject;
+  prjPlan: IProjectPlan;
+  company: ICompanyAbs;
   owner: IMember;
   members: IMember[];
 }

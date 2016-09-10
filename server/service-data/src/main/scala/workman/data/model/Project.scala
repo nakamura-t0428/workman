@@ -1,8 +1,10 @@
 package workman.data.model
 
 import java.sql.Timestamp
+import java.sql.Date
 
 case class Project(
+    // Basic Info
     prjId:String,
     name:String,
     description:String,
@@ -10,7 +12,8 @@ case class Project(
     compId:String,
     regDate:Timestamp,
     disabled:Boolean = false,
-    permManager:Int = ProjectPermission.defaultManager,
-    permMember:Int = ProjectPermission.defaultMember,
-    permGuest:Int = ProjectPermission.defaultGuest
+    // Planning Schedule
+    expectedDays:Float,
+    startDate:Date,
+    startDateFixed:Boolean = false
     )

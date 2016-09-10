@@ -8,8 +8,8 @@ import workman.api.json.request._
 object UserJsonSupport extends DefaultJsonProtocol  {
   import spray.json._
   
-  implicit val userAuthFormatter = jsonFormat2(UserAuth)
-  implicit val userRegisterFormatter = jsonFormat3(UserRegister)
-  implicit val userAuthResponceFormatter = jsonFormat4(UserAuthResponse)
-  implicit val myInfoRespFormatter = jsonFormat4(MyInfoResp)
+  implicit val userAuthFormatter = jsonFormat2(UserAuth.apply)
+  implicit val userRegisterFormatter = jsonFormat3(UserRegister.apply)
+  implicit val userAuthResponceFormatter = jsonFormat4(UserAuthResp.apply)
+  implicit val myInfoRespFormatter = jsonFormat4(MyInfoResp.apply)
 }

@@ -5,9 +5,12 @@ import java.sql.Timestamp
 import scala.util.Try
 import CommonDateFormatter._
 import workman.util.converter.JavaDateConverter._
+import java.sql.Date
 
 object DateHelper {
   def now:Timestamp = new Timestamp(System.currentTimeMillis)
+  def today:Date = todayDate
+  
   def lastdate:Calendar = {
     val cal = Calendar.getInstance
     cal.add(Calendar.DATE, -1)

@@ -10,7 +10,12 @@ class SchemaService(val dbm:ServiceDb) {
   import dbm.db
   import dbm.driver.api._
   
-  val tbls = List(dbm.userTbl, dbm.projectTbl, dbm.prjUserTbl, dbm.companyTbl)
+  val tbls = List(
+      dbm.prjUserTbl,
+      dbm.projectTbl,
+      dbm.companyTbl,
+      dbm.userTbl
+      )
   val schema = tbls.map(_.schema).reduce(_ ++ _)
   
   def initTables = {

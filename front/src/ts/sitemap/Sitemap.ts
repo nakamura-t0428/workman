@@ -13,6 +13,7 @@ import {GuestController} from '../controller/GuestController';
 import {UserController} from '../controller/UserController';
 import {ProjectController} from '../controller/ProjectController';
 import {ProjectCreateController} from '../controller/ProjectCreateController';
+import {ProjectPlanController} from '../controller/ProjectPlanController';
 
 export class Sitemap {
   constructor(
@@ -37,6 +38,7 @@ export class Sitemap {
       url: '/sitemap',
       templateUrl: 'user/project/projectSitemap.html',
     })
+    .state('user.top.project.plan', ProjectPlanController.state) // ユーザ プロジェクト
     .state('user.top.project.member', { // ユーザ プロジェクト
       url: '/member',
       templateUrl: 'user/project/projectMember.html',

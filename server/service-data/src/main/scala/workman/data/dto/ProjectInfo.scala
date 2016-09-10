@@ -1,7 +1,10 @@
 package workman.data.dto
 
+import java.sql.Date
+import workman.data.model._
+
 case class ProjectInfo(
-    prjId:String,
-    name:String,
-    owner:UserInfo
+    project:Project,
+    company:Company,
+    owner:User
     )

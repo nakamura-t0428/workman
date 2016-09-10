@@ -4,6 +4,11 @@ export interface ICompany{
   description: string;
 }
 
+export interface ICompanyAbs{
+  compId: string;
+  name: string;
+}
+
 export interface ICompanyQueryParam{
   name: string;
   limit: number;

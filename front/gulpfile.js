@@ -132,6 +132,7 @@ gulp.task('js', function(){
       './bower_components/angular-loading-bar/build/loading-bar.min.js',
       './bower_components/angular-ui-grid/ui-grid.min.js',
       './bower_components/ngstorage/ngStorage.min.js',
+      './bower_components/angular-i18n/angular-locale_ja-jp.js',
       ])
     .pipe(concat('common-components.js'))
     .pipe(gulp.dest('./dist/js'));

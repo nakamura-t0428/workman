@@ -4,7 +4,7 @@ import workman.data.db.ServiceDb
 import workman.data.model._
 import workman.data.dto._
 import workman.util.helper.UUIDHelper
-import workman.util.helper.DateHelper.now
+import workman.util.helper.DateHelper.{now, today}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
@@ -48,7 +48,10 @@ class ProjectService(val dbm:ServiceDb) {
         description = reg.description,
         compId = reg.compId,
         ownerId = reg.ownerId,
-        regDate = now
+        regDate = now,
+        expectedDays = 0,
+        startDate = today,
+        startDateFixed = false
         )
     println(prj.compId)
     val q = dbm.projectTbl += prj
@@ -63,12 +66,13 @@ class ProjectService(val dbm:ServiceDb) {
   def ownProjects(userId:String, limit:Limit):Future[Seq[ProjectInfo]] = {
     val q = for{
       prj <- dbm.projectTbl if prj.ownerId === userId
+      company <- dbm.companyTbl if company.compId === prj.compId
       owner <- dbm.userTbl if owner.userId === prj.ownerId
-    } yield (prj.prjId, prj.name, owner.userId, owner.name, prj.regDate)
+    } yield (prj, company, owner)
     
-    val res = q.sortBy(_._5).drop(limit.limit * limit.page).take(limit.limit)
-      .result.map(_.map{case (prjId, prjName, ownerId, ownerName, regDate) =>
-        {ProjectInfo(prjId, prjName, UserInfo(ownerId, ownerName))}})
+    val res = q.sortBy(_._2.regDate.desc).drop(limit.limit * limit.page).take(limit.limit)
+      .result.map(_.map{case (prj, company, owner) =>
+        {ProjectInfo(prj, company, owner)}})
     
     db.run(res)
   }
@@ -76,19 +80,20 @@ class ProjectService(val dbm:ServiceDb) {
   def myProjects(userId:String, limit:Limit = DefaultLimit):Future[Seq[ProjectInfo]] = {
     val q1 = for{
       prj <- dbm.projectTbl if prj.ownerId === userId
+      company <- dbm.companyTbl if company.compId === prj.compId
       owner <- dbm.userTbl if owner.userId === prj.ownerId
-    } yield (prj.prjId, prj.name, owner.userId, owner.name, prj.regDate)
+    } yield (prj, company, owner)
     val q2 = for{
       prjUser <- dbm.prjUserTbl if prjUser.userId === userId
       prj <- dbm.projectTbl if prj.prjId === prjUser.prjId
+      company <- dbm.companyTbl if company.compId === prj.compId
       owner <- dbm.userTbl if owner.userId === prj.ownerId
-    } yield (prj.prjId, prj.name, owner.userId, owner.name, prj.regDate)
+    } yield (prj, company, owner)
     
-    val q = {q1 union q2}.distinctOn(_._1).sortBy(_._5)
+    val q = {q1 union q2}.distinctOn(_._1.prjId).sortBy(_._1.regDate.desc)
     
     val res = q.drop(limit.limit * limit.page).take(limit.limit)
-      .result.map(_.map{case (prjId, prjName, ownerId, ownerName, regDate) =>
-        {ProjectInfo(prjId, prjName, UserInfo(ownerId, ownerName))}})
+      .result.map(_.map{case (prj, company, owner) => ProjectInfo(prj, company, owner)})
     
     db.run(res)
   }
@@ -96,15 +101,17 @@ class ProjectService(val dbm:ServiceDb) {
   def myProject(userId:String, prjId:String) = {
     val qPrj = for{
       prj <- dbm.projectTbl if prj.prjId === prjId
+      company <- dbm.companyTbl if company.compId === prj.compId
       owner <- dbm.userTbl if owner.userId === prj.ownerId
-    } yield (prj.prjId, prj.name, owner.userId, owner.name, prj.regDate)
+    } yield (prj, company, owner)
+    
     val qMem = for{
       prjUser <- dbm.prjUserTbl if prjUser.prjId === prjId
       member <- dbm.userTbl if member.userId === prjUser.userId
     } yield (member.userId, member.name)
     
-    val resPrj = qPrj.result.map(_.map{case (prjId, prjName, ownerId, ownerName, regDate) =>
-      ProjectInfo(prjId, prjName, UserInfo(ownerId, ownerName))}.head)
+    val resPrj = qPrj.result.map(_.map{case (prj, company, owner) =>
+      (ProjectInfo(prj, company, owner))}.head)
     val resMem = qMem.result.map(_.map{case (userId, userName) => MemberInfo(userId, userName)})
     
     db.run(resPrj).zip(db.run(resMem)).filter{case (p, mems) => {p.owner.userId == userId || mems.exists(_.userId == userId)}}

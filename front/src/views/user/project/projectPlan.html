@@ -1,0 +1,20 @@
+<form>
+  <div class="form-group">
+    <label for="expected-days">見積もり日数</label>
+    <input id="expected-days" class="form-control" ng-model="c.project.prjPlan.expectedDays" type="number" min="1" max="100" />
+  </div>
+  <div class="form-group">
+    <label for="start-day">開始予定日</label>
+    <span class="form-controller">{{c.dt | date:'yyyy-MM-dd (EEE)'}}</span>
+    <div uib-datepicker ng-model="c.project.prjPlan.startDate" class="well well-sm" datepicker-options="c.datePickerOptions"></div>
+    <!--
+    <div id="start-day" style="display:inline-block; min-height:290px;">
+    </div>
+    -->
+  </div>
+  <div class="form-group">
+    <label for="worker">担当者</label>
+    <div>
+    </div>
+  </div>
+</form>

@@ -23,12 +23,12 @@ export class ProjectController {
       url: '/project/:prjId',
       templateUrl: 'user/project/projectDetail.html',
       resolve: {
-        prjInfo: ['$state', '$stateParams', 'apiEndPoint', function($state:IStateService, $stateParams:IStateParamsService, apiEndPoint:APIEndPoint) {
+        project: ['$state', '$stateParams', 'apiEndPoint', function($state:IStateService, $stateParams:IStateParamsService, apiEndPoint:APIEndPoint) {
           return apiEndPoint.projectResource.get({'prjId':$stateParams['prjId']}, (r:IProjectDetail)=>{
           }, (e:any)=>{});
         }],
-        loc: ['prjInfo' ,function(prjInfo:IResource<IProjectDetail>) {
-          return prjInfo.$promise.then((r:IProjectDetail)=> {
+        loc: ['project' ,function(project:IResource<IProjectDetail>) {
+          return project.$promise.then((r:IProjectDetail)=> {
             return {
               label: r.prjInfo.name,
               state: 'user.top.project',
@@ -39,6 +39,11 @@ export class ProjectController {
         }],
         topMenu: function():Array<ITopMenu> {
           return [
+            {
+              label: '実施予定',
+              desc: '',
+              state: 'user.top.project.plan'
+            },
             {
               label: 'サイトマップ',
               desc: '',
@@ -52,7 +57,7 @@ export class ProjectController {
           ];
         }
       },
-      controller: ['apiEndPoint', '$state', '$stateParams', '$uibModal', '$scope', 'prjInfo', ProjectController],
+      controller: ['apiEndPoint', '$state', '$stateParams', '$uibModal', '$scope', 'project', ProjectController],
       controllerAs: 'prjCtrl',
     };
   }

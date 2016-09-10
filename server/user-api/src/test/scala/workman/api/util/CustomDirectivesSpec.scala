@@ -25,7 +25,7 @@ import workman.api.db.{DbServices => db}
 import workman.api.json.JsonSupport._
 import workman.api.json.UserJsonSupport._
 import workman.api.json.request.{Invitation, UserRegister}
-import workman.api.json.response.{FailureMessage, SuccessMessage, SysErrMessage, UserAuthResponse, AuthorizationError}
+import workman.api.json.response.{FailureMessage, SuccessMessage, SysErrMessage, UserAuthResp, AuthorizationError}
 import workman.api.service.TmpAuthLogic
 import workman.api.service.TmpAuthLogic.InvitaionExistsException
 

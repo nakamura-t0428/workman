@@ -20,6 +20,7 @@ import spray.http.StatusCodes
 import spray.util.LoggingContext
 import workman.data.dto.Limit
 import workman.data.dto.CompanyReg
+import workman.data.dto.ProjectInfo
 
 trait ProjectRoute extends HttpService with LazyLogging {
   implicit def exceptionHandler(implicit log:LoggingContext):ExceptionHandler
@@ -105,7 +106,7 @@ trait ProjectRoute extends HttpService with LazyLogging {
     entity(as[ProjectRegister]) {prj => 
       onComplete(db.projectService.createProject(ProjectReg(prj.name, prj.description, userId, prj.compId))) {
         case Success(p) => complete{
-          ProjectInfoResponse(prjId = p.prjId, name = p.name)
+          ProjectInfoResp.fromModel(p)
         }
         case Failure(e) => complete {
           logger.error("SystemError", e)
@@ -118,7 +119,7 @@ trait ProjectRoute extends HttpService with LazyLogging {
       val dbRes = db.projectService.myProjects(userId, Limit(limit min 50 , page))
       onComplete(dbRes) {
         case Success(prjs) => complete{
-          ProjectList(prjs.map(p => ProjectInfoResponse(p.prjId, p.name)).toList)
+          ProjectList(prjs.map(p => ProjectInfoResp.fromModel(p)).toList)
         }
         case Failure(e) => complete{
           logger.error("SystemError", e)
@@ -130,12 +131,8 @@ trait ProjectRoute extends HttpService with LazyLogging {
   def prjDetail(userId:String, prjId:String) = {
     val dbRes = db.projectService.myProject(userId, prjId)
     onComplete(dbRes) {
-      case Success((prj,members)) => complete{
-        ProjectDetailResp(
-            ProjectInfoResponse(prj.prjId, prj.name),
-            MemberInfoResp(prj.owner.userId, prj.owner.name),
-            members.map(mem => MemberInfoResp(mem.userId, mem.name)).toList
-            )
+      case Success((prj, members)) => complete{
+        ProjectDetailResp.fromModel(prj, members)
       }
       case Failure(e) => complete{
         logger.error("SystemError", e)

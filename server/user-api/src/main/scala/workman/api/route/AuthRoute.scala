@@ -22,14 +22,14 @@ import workman.api.db.{DbServices => db}
 import workman.api.json.JsonSupport._
 import workman.api.json.UserJsonSupport._
 import workman.api.json.request.{Invitation, UserRegister}
-import workman.api.json.response.{FailureMessage, SuccessMessage, SysErrMessage, UserAuthResponse, AuthorizationError}
+import workman.api.json.response.{FailureMessage, SuccessMessage, SysErrMessage, UserAuthResp, AuthorizationError}
 import workman.api.util.{CustomDirectives, UserAPIProps}
 import workman.api.service.TmpAuthLogic
 import workman.api.service.TmpAuthLogic.InvitaionExistsException
 import workman.data.dto.{UserReg, UserAuth}
 import workman.data.service.AlreadyExistError
 import workman.api.json.response.MyInfoResp
-import workman.api.json.response.ProjectInfoResponse
+import workman.api.json.response.ProjectInfoResp
 import workman.api.json.ProjectJsonSupport._
 import workman.api.json.response.MyInfoResp
 
@@ -97,7 +97,7 @@ trait AuthRoute extends HttpService with LazyLogging {
           case Success(Some(user)) => {
             val token = UserAuthJWT.tokenString(user.userId)
             CustomDirectives.respondWithNewToken(token) {
-              complete(UserAuthResponse(true, token, user.email, user.name))
+              complete(UserAuthResp(true, token, user.email, user.name))
             }
           }
           case Success(_) => {
@@ -130,7 +130,7 @@ trait AuthRoute extends HttpService with LazyLogging {
       path("test") {
         get {
           complete {
-            ProjectInfoResponse("1", "テストプロジェクト1")
+            ProjectInfoResp("1", "テストプロジェクト1")
           }
         }
         
