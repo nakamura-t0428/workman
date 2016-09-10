@@ -3,6 +3,8 @@ import {IMember} from './IMemberData'
 export interface IProject {
   prjId: string;
   name: string;
+  compId:string;
+  description:string;
 }
 
 export interface INewProject {

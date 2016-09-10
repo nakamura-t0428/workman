@@ -4,9 +4,11 @@
 
 let app = angular.module('main.app', ['ngResource', 'ngStorage', 'ngAnimate', 'ui.bootstrap', 'ui.router', 'angular-loading-bar', 'ui.grid']);
 
-//////////////////////////////////////////////////////// Factory
+//////////////////////////////////////////////////////// Service
 import {APIEndPoint} from './service/APIEndPoint';
-app.factory('apiEndPoint', ['$resource', APIEndPoint.factory])
+app.factory('apiEndPoint', ['$resource', APIEndPoint.factory]);
+import {ProjectList} from './service/ProjectList';
+app.factory('projectList', ['apiEndPoint', ProjectList.factory]);
 
 //////////////////////////////////////////////////////// Controller
 import {SignInController} from './controller/SignInController';

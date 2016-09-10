@@ -3,8 +3,10 @@
 import IResource = ng.resource.IResource;
 import IStateService = angular.ui.IStateService;
 import IStateParamsService = angular.ui.IStateParamsService;
+import IWindowService = ng.IWindowService;
 
 import {APIEndPoint} from '../service/APIEndPoint';
+import {ProjectList} from '../service/ProjectList';
 import {INewProject, IProject} from '../model/IProject';
 import {ICompany, ICompanyQueryParam} from '../model/ICompany';
 
@@ -18,8 +20,10 @@ export class ProjectCreateController {
 
   constructor(
     private apiEndPoint:APIEndPoint,
+    private projectList:ProjectList,
     private $state:IStateService,
-    private $stateParams:IStateParamsService
+    private $stateParams:IStateParamsService,
+    private $window:IWindowService
   ) {}
 
   getCompList(keyword:string) {
@@ -35,7 +39,10 @@ export class ProjectCreateController {
     let resource = new this.apiEndPoint.projectResource(this.project);
     resource.$save((resp:IProject,r:any) => {
       if(resp.prjId) {
-        // Jump to last page.
+        // Update Project List.
+        this.projectList.resetList();
+        // Jump to Detail.
+        this.$state.go('user.top.project', {prjId: resp.prjId});
       } else {
         console.log(`Failed to create company: ${this.project}`);
       }
@@ -45,14 +52,14 @@ export class ProjectCreateController {
   }
 
   cancel() {
-    // Jump to last page.
+    this.$window.history.back();
   }
 
   public static get state() {
     return {
       url: '/project-create',
       templateUrl: 'user/project/projectCreate.html',
-      controller: ['apiEndPoint', '$state', '$stateParams', ProjectCreateController],
+      controller: ['apiEndPoint', 'projectList', '$state', '$stateParams', '$window', ProjectCreateController],
       controllerAs: 'c',
     };
   }

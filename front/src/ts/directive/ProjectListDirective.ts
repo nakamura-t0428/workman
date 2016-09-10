@@ -3,28 +3,21 @@ import IDirective = ng.IDirective;
 
 import IModalService = angular.ui.bootstrap.IModalService;
 import {APIEndPoint} from '../service/APIEndPoint';
+import {ProjectList} from '../service/ProjectList';
 import {IProject, INewProject, IProjectQueryParam} from '../model/IProject';
 import {CompanyEditDialog} from '../dialog/CompanyEditDialog';
 
 export class ProjectListDirective implements IDirective {
-  private searchOpt:IProjectQueryParam = {
-    name: "",
-    limit: 10,
-    page: 0,
-  };
-  private prjList:Array<IProject> = [];
-
   constructor(
     private apiEndPoint:APIEndPoint,
-    private $uibModal:IModalService
+    private $uibModal:IModalService,
+    private projectList:ProjectList
   ){
-    this.resetList()
+    projectList.resetList();
   }
 
-  public resetList() {
-    this.apiEndPoint.projectResource.query(this.searchOpt, (resp:Array<IProject>) => {
-      this.prjList = resp;
-    })
+  public get prjList():Array<IProject> {
+    return this.projectList.prjList;
   }
 
   public static factory = [() => {
@@ -33,7 +26,7 @@ export class ProjectListDirective implements IDirective {
       replace: true,
       transclude: true,
       templateUrl: 'user/project/projectList.html',
-      controller: ['apiEndPoint', '$uibModal', ProjectListDirective],
+      controller: ['apiEndPoint', '$uibModal', 'projectList', ProjectListDirective],
       controllerAs: 'c',
       scope: true
     }

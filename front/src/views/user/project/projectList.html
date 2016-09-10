@@ -3,7 +3,7 @@
   <ul class="nav nav-pills nav-stacked">
     <li><a ui-sref="user.top.project-create"><span class="glyphicon glyphicon-plus"></span> 新規プロジェクト</a></li>
     <li ng-repeat="prj in c.prjList" ui-sref-active="active" >
-      <a ui-sref="{{user.top.project({prjId:prj.prjId})}}">{{prj.name}}</a>
+      <a ui-sref="user.top.project({prjId:prj.prjId})">{{prj.name}}</a>
     </li>
   </ul>
 </li>
