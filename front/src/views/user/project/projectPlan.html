@@ -15,6 +15,15 @@
   <div class="form-group">
     <label for="worker">担当者</label>
     <div>
+      <ui-select ng-model="c.selected" theme="bootstrap" on-select="c.workerSelected($item, $model)" style="min-width: 300px;" title="担当者の選択">
+        <ui-select-match placeholder="担当者を選択してください">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="person.userId as person in c.people | propsFilter: {name: $select.search, email: $select.search}">
+          <div ng-bind-html="person.name | highlight: $select.search"></div>
+          <small>
+            email: {{person.email}}
+          </small>
+        </ui-select-choices>
+      </ui-select>
     </div>
   </div>
 </form>

@@ -2,7 +2,7 @@
 
 ////////////////////////////////////////////////// TypeScript
 
-let app = angular.module('main.app', ['ngResource', 'ngStorage', 'ngAnimate', 'ui.bootstrap', 'ui.router', 'angular-loading-bar', 'ui.grid']);
+let app = angular.module('main.app', ['ngResource', 'ngStorage', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'angular-loading-bar', 'ui.grid', 'ui.select']);
 
 //////////////////////////////////////////////////////// Service
 import {APIEndPoint} from './service/APIEndPoint';
@@ -40,9 +40,13 @@ app.directive('companyList', CompanyListDirective.factory);
 import {ProjectListDirective} from './directive/ProjectListDirective';
 app.directive('projectList', ProjectListDirective.factory);
 
-////////////////////////////////////////////////////////// Config    
+////////////////////////////////////////////////////////// Config
 import {Sitemap} from './sitemap/Sitemap';
 app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', Sitemap.factory]);
 
 import {AuthConfig} from './config/AuthConfig';
 app.config(['$httpProvider', AuthConfig.factory]);
+
+////////////////////////////////////////////////////////// Filter
+import {propsFilter} from './filter/PropsFilter'
+app.filter('propsFilter', propsFilter);

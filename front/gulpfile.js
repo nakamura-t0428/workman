@@ -24,6 +24,7 @@ var BowerWebpackPlugin = require("bower-webpack-plugin");
 var sass = require('gulp-sass');
 var templateCache = require('gulp-angular-templatecache');
 var flatten = require('gulp-flatten');
+var merge = require('merge-stream');
 
 var bowerWebpackPlugin = new BowerWebpackPlugin({
   modulesDirectories: ["bower_components"],
@@ -126,6 +127,7 @@ gulp.task('js', function(){
       './bower_components/angular/angular.min.js',
       './bower_components/angular-resource/angular-resource.min.js',
       './bower_components/angular-animate/angular-animate.min.js',
+      './bower_components/angular-sanitize/angular-sanitize.min.js',
       './bower_components/angular-bootstrap/ui-bootstrap.min.js',
       './bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
       './bower_components/angular-ui-router/release/angular-ui-router.min.js',
@@ -133,22 +135,32 @@ gulp.task('js', function(){
       './bower_components/angular-ui-grid/ui-grid.min.js',
       './bower_components/ngstorage/ngStorage.min.js',
       './bower_components/angular-i18n/angular-locale_ja-jp.js',
+      './bower_components/angular-ui-select/dist/select.min.js',
       ])
     .pipe(concat('common-components.js'))
     .pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('css', function(){
-  return gulp.src('./src/**/*.scss')
+  var scssStream = gulp.src('./src/css/**/*.scss')
     .pipe(sass())
+    .pipe(concat('scss-files.css'));
+  var cssStream = gulp.src([
+    './bower_components/angular-ui-select/dist/select.css',
+    './bower_components/select2/dist/css/select2.css',
+    './bower_components/selectize/dist/css/selectize.bootstrap3.css',
+    ])
+    .pipe(concat('css-files.css'));
+  return merge(scssStream, cssStream)
     .on('error', function(err) {
       console.log(err.message);
     })
     .pipe(autoprefixer({
       browsers: ['last 2 version', 'ie 8', 'ie 9']
     }))
+    .pipe(concat('common.css'))
     .pipe(cssmin())
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./dist/css'));
 });
 
 gulp.task('font', ['bower'], function(){

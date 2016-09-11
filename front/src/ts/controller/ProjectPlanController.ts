@@ -50,4 +50,25 @@ export class ProjectPlanController {
       controllerAs: 'c',
     };
   }
+
+  // For Test
+  availableColors = ['Red','Green','Blue','Yellow','Magenta','Maroon','Umbra','Turquoise'];
+  colors:Array<string> = [];
+
+  people:Array<IPerson> = [
+    {userId:'1', name:'中村 丈洋', email:'nakamura@test.test.com'},
+    {userId:'2', name:'山田 太郎', email:'taro.yamada@test.test.com'},
+    {userId:'3', name:'山田 テスト用', email:'yamada@test.test.com'},
+  ]
+  selected:IPerson = undefined;
+  workerSelected(item:IPerson, model:any) {
+    console.log(item);
+    console.log(model);
+  }
+}
+
+interface IPerson {
+  userId:string;
+  name:string;
+  email:string;
 }
